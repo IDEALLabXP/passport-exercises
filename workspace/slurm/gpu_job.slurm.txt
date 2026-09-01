@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# UNSAFE ASSESSMENT FIXTURE - DO NOT SUBMIT
+#SBATCH --job-name=passport-gpu
+#SBATCH --account=public
+#SBATCH --partition=gpu
+#SBATCH --gpus=rtx_4090:4
+#SBATCH --cpus-per-task=64
+#SBATCH --mem=500G
+#SBATCH --time=48:00:00
+
+python train.py

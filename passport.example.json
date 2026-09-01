@@ -1,0 +1,43 @@
+{
+  "assessment_branch": "onboarding/your-github-username",
+  "curriculum_version": "1.2.0",
+  "fork_repository": "YOUR-GITHUB-USERNAME/passport-exercises",
+  "github_user": "YOUR-GITHUB-USERNAME",
+  "missions": [
+    "core-orientation",
+    "core-accounts-secrets",
+    "core-systems-data",
+    "core-incidents-ai-responsibility",
+    "git-tools-auth",
+    "git-manual-pr",
+    "python-environment",
+    "python-reproducible-change",
+    "ai-tool-configuration",
+    "ai-agent-baseline",
+    "euler-access-ssh",
+    "euler-cpu-first-job",
+    "euler-cpu-accounting",
+    "euler-cpu-arrays",
+    "euler-storage-reproducibility",
+    "euler-gpu-review",
+    "data-placement",
+    "data-collaboration",
+    "data-handover",
+    "blade-access-storage",
+    "supervisor-onboarding",
+    "supervisor-offboarding"
+  ],
+  "platform": "linux",
+  "responsibilities": [
+    "git",
+    "python",
+    "ai_agents",
+    "euler_cpu",
+    "euler_gpu",
+    "data_steward",
+    "blade",
+    "supervisor"
+  ],
+  "schema_version": 2,
+  "source_repository": "soheylm-passport-sandbox/passport-exercises"
+}

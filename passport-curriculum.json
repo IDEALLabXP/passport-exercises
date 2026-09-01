@@ -1,0 +1,347 @@
+{
+  "curriculum_version": "1.2.0",
+  "missions": {
+    "ai-agent-baseline": {
+      "editable_artifacts": [
+        "workspace/agent_task/storage-plan.md"
+      ],
+      "evidence": [
+        "evidence/ai/agent-baseline.md"
+      ],
+      "human_gate": true,
+      "track": "ai_agents"
+    },
+    "ai-tool-configuration": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/ai/tool-configuration.md"
+      ],
+      "human_gate": false,
+      "track": "ai_agents"
+    },
+    "blade-access-storage": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/blade/access-storage.md"
+      ],
+      "human_gate": true,
+      "track": "blade"
+    },
+    "core-accounts-secrets": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/core/accounts-secrets.md"
+      ],
+      "human_gate": false,
+      "track": "core"
+    },
+    "core-incidents-ai-responsibility": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/core/incidents-ai.md"
+      ],
+      "human_gate": true,
+      "track": "core"
+    },
+    "core-orientation": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/core/orientation.md"
+      ],
+      "human_gate": false,
+      "track": "core"
+    },
+    "core-systems-data": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/core/systems-data.md"
+      ],
+      "human_gate": false,
+      "track": "core"
+    },
+    "data-collaboration": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/data/collaboration.md"
+      ],
+      "human_gate": false,
+      "track": "data_steward"
+    },
+    "data-handover": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/data/handover.md"
+      ],
+      "human_gate": true,
+      "track": "data_steward"
+    },
+    "data-placement": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/data/placement.md"
+      ],
+      "human_gate": false,
+      "track": "data_steward"
+    },
+    "euler-access-ssh": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/euler/access-ssh.md"
+      ],
+      "human_gate": false,
+      "track": "euler_cpu"
+    },
+    "euler-cpu-accounting": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/euler/accounting.md"
+      ],
+      "human_gate": false,
+      "track": "euler_cpu"
+    },
+    "euler-cpu-arrays": {
+      "editable_artifacts": [
+        "workspace/slurm/array_job.slurm.txt"
+      ],
+      "evidence": [
+        "evidence/euler/arrays.md"
+      ],
+      "human_gate": false,
+      "track": "euler_cpu"
+    },
+    "euler-cpu-first-job": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/euler/first-job.md"
+      ],
+      "human_gate": false,
+      "track": "euler_cpu"
+    },
+    "euler-gpu-review": {
+      "editable_artifacts": [
+        "workspace/slurm/gpu_job.slurm.txt"
+      ],
+      "evidence": [
+        "evidence/euler/gpu-review.md"
+      ],
+      "human_gate": true,
+      "track": "euler_gpu"
+    },
+    "euler-storage-reproducibility": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/euler/storage-reproducibility.md"
+      ],
+      "human_gate": true,
+      "track": "euler_cpu"
+    },
+    "git-manual-pr": {
+      "editable_artifacts": [
+        "workspace/manual_task/project-note.md"
+      ],
+      "evidence": [
+        "evidence/git/manual-pr.md"
+      ],
+      "human_gate": true,
+      "track": "git"
+    },
+    "git-tools-auth": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/git/tools-auth.md"
+      ],
+      "human_gate": false,
+      "track": "git"
+    },
+    "python-environment": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/python/environment.md"
+      ],
+      "human_gate": false,
+      "track": "python"
+    },
+    "python-reproducible-change": {
+      "editable_artifacts": [
+        "workspace/python_project/passport_example.py",
+        "workspace/python_project/tests/test_passport_example.py"
+      ],
+      "evidence": [
+        "evidence/python/reproducible-change.md"
+      ],
+      "human_gate": true,
+      "track": "python"
+    },
+    "supervisor-offboarding": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/supervisor/offboarding.md"
+      ],
+      "human_gate": true,
+      "track": "supervisor"
+    },
+    "supervisor-onboarding": {
+      "editable_artifacts": [],
+      "evidence": [
+        "evidence/supervisor/onboarding-packet.md"
+      ],
+      "human_gate": false,
+      "track": "supervisor"
+    }
+  },
+  "platforms": [
+    "windows",
+    "macos",
+    "linux"
+  ],
+  "responsibilities": {
+    "ai_agents": {
+      "title": "Use AI coding agents on lab work",
+      "tracks": [
+        "ai_agents"
+      ]
+    },
+    "blade": {
+      "title": "Use the IDEAL Lab Blade server",
+      "tracks": [
+        "blade"
+      ]
+    },
+    "data_steward": {
+      "title": "Organize shared research data and results",
+      "tracks": [
+        "data_steward"
+      ]
+    },
+    "euler_cpu": {
+      "title": "Run CPU computation on Euler",
+      "tracks": [
+        "euler_cpu"
+      ]
+    },
+    "euler_gpu": {
+      "title": "Run GPU computation on Euler",
+      "tracks": [
+        "euler_gpu"
+      ]
+    },
+    "git": {
+      "title": "Modify or review files through GitHub",
+      "tracks": [
+        "git"
+      ]
+    },
+    "python": {
+      "title": "Develop or run Python projects",
+      "tracks": [
+        "python"
+      ]
+    },
+    "supervisor": {
+      "title": "Approve access or supervise researchers",
+      "tracks": [
+        "supervisor"
+      ]
+    }
+  },
+  "schema_version": 1,
+  "source_repository": "soheylm-passport-sandbox/passport-exercises",
+  "track_dependencies": {
+    "ai_agents": [
+      "git"
+    ],
+    "blade": [],
+    "core": [],
+    "data_steward": [],
+    "euler_cpu": [],
+    "euler_gpu": [
+      "euler_cpu"
+    ],
+    "git": [],
+    "python": [
+      "git"
+    ],
+    "supervisor": []
+  },
+  "tracks": [
+    {
+      "id": "core",
+      "missions": [
+        "core-orientation",
+        "core-accounts-secrets",
+        "core-systems-data",
+        "core-incidents-ai-responsibility"
+      ],
+      "title": "Universal Safety Core"
+    },
+    {
+      "id": "git",
+      "missions": [
+        "git-tools-auth",
+        "git-manual-pr"
+      ],
+      "title": "Git Contributor"
+    },
+    {
+      "id": "python",
+      "missions": [
+        "python-environment",
+        "python-reproducible-change"
+      ],
+      "title": "Reproducible Python"
+    },
+    {
+      "id": "ai_agents",
+      "missions": [
+        "ai-tool-configuration",
+        "ai-agent-baseline"
+      ],
+      "title": "AI Agent User"
+    },
+    {
+      "id": "euler_cpu",
+      "missions": [
+        "euler-access-ssh",
+        "euler-cpu-first-job",
+        "euler-cpu-accounting",
+        "euler-cpu-arrays",
+        "euler-storage-reproducibility"
+      ],
+      "title": "Euler CPU"
+    },
+    {
+      "id": "euler_gpu",
+      "missions": [
+        "euler-gpu-review"
+      ],
+      "title": "Euler GPU"
+    },
+    {
+      "id": "data_steward",
+      "missions": [
+        "data-placement",
+        "data-collaboration",
+        "data-handover"
+      ],
+      "title": "Research Data Steward"
+    },
+    {
+      "id": "blade",
+      "missions": [
+        "blade-access-storage"
+      ],
+      "title": "Blade User"
+    },
+    {
+      "id": "supervisor",
+      "missions": [
+        "supervisor-onboarding",
+        "supervisor-offboarding"
+      ],
+      "title": "Supervisor and Staff"
+    }
+  ],
+  "universal_tracks": [
+    "core"
+  ]
+}

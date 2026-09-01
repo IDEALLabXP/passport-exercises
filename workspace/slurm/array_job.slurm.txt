@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# UNSAFE ASSESSMENT FIXTURE - DO NOT SUBMIT
+#SBATCH --job-name=passport-array
+#SBATCH --account=es_fuge
+#SBATCH --time=00:10:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=1G
+#SBATCH --array=0-99
+#SBATCH --output=logs/%x_%j.out
+#SBATCH --error=logs/%x_%j.err
+
+echo "task=$SLURM_ARRAY_TASK_ID"

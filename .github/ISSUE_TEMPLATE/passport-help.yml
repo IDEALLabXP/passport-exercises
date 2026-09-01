@@ -1,0 +1,45 @@
+name: Passport help request
+description: Queue a public, non-secret setup or assessment blocker.
+title: "passport help: "
+labels:
+  - passport-help
+assignees:
+  - SoheylM
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is public and asynchronous. Never include passwords, tokens,
+        private keys, recovery codes, ETH or other private identifiers, real
+        logs, research data, confidential details, or screenshots containing
+        private information. Your GitHub username and public PR URL are expected.
+  - type: dropdown
+    id: blocker
+    attributes:
+      label: Where are you blocked?
+      options:
+        - The first automatic check has not appeared after 30 minutes
+        - gh passport start or open stopped with an error
+        - I accidentally closed the assessment PR
+        - The controller check reports a non-sensitive problem I do not understand
+    validations:
+      required: true
+  - type: input
+    id: pull_request
+    attributes:
+      label: Public assessment PR URL
+      description: Paste only the public IDEALLab/passport-exercises PR URL. Leave blank if no PR exists.
+  - type: textarea
+    id: message
+    attributes:
+      label: Sanitized error text
+      description: Retype only the short non-secret error. Do not paste a full log or screenshot.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-content check
+      options:
+        - label: I verified that this issue contains no credentials, ETH or other private identifiers, private logs, research data, or confidential details.
+          required: true
