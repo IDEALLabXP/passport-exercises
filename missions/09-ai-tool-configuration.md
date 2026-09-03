@@ -5,60 +5,50 @@
 You select an available AI route without assuming the lab pays, understand the
 cost and data boundaries, and keep credentials out of Git and prompts.
 
-## Why This Matters
+## Concept
 
 Models, providers, agents, interfaces, and tool protocols are different
 components. Account ownership, billing, model access, and data terms can change
 independently.
 
-## Before You Start
+## Worked Example
 
-Complete the manual Git baseline. Review the current
-[AI reference index](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/reference/ai/README.md) because entitlements,
-interfaces, model lists, and prices are volatile.
+The components are classified correctly and no credential appears in a file, prompt, screenshot, or Git diff.
 
-## Machine And Shell
+A correct example uses these decisions:
 
-**Your computer - web browser and approved editor settings.** Do not paste an
-API key into source files, terminal history, documentation, screenshots,
-prompts, or chat.
+- **What is OpenRouter in this stack?** A provider or gateway for model access, routing, billing, and limits.
+- **Where may an API key be stored?** In the supported operating-system keychain or approved secret store.
 
-## Steps
+## Common Trap
 
-Choose one route:
+Calling OpenRouter an agent, confusing a model with an IDE, or pasting an API key into settings tracked by Git.
 
-1. Preferred no-cost route when eligible: VS Code with GitHub Copilot Student.
-2. Personally funded route: Zed with a personal OpenRouter account and explicit
-   spending limit. The lab provides no credits, reimbursement, account
-   administration, or protection from unintended personal charges.
-3. Offline assessment route: review a supplied agent diff and command record
-   without creating an account or purchasing access.
+## Your Action
 
-For an API route, enter the key only through the tool's documented secure
-credential interface, configure a conservative limit where available, and
-check usage before and after the bounded exercise.
+Identify the model, provider or gateway, agent harness, interface, and tool protocol in the fictional setup, then configure one approved access route without storing a key in the repository.
 
-## Expected Result
+The passport presents the structured questions and required confirmation in the
+browser. Do not create or edit a submission JSON file by hand.
 
-You can identify the model, provider or gateway, agent, interface, account
-owner, payer, data boundary, and credential-storage mechanism for the route.
+## Check Your Work
 
-## Independent Verification
-
-Search the passport diff and local project files for accidental credential
-material. Verify billing and usage in the provider's own account interface; do
-not rely on an agent's statement.
-
-## Evidence To Submit
-
-Complete `evidence/ai/tool-configuration.md`. Name the route and safeguards but
-never include a key, balance screenshot, private provider identifier, or private
-prompt content.
+Use **Check my work** before submitting. The local verifier checks only the
+bounded activity named above. A score of 100% is required, and every
+safety-critical question must be correct. Failed attempts provide targeted
+feedback and can be retried without penalty.
 
 ## If Blocked
 
 Use the offline route. Purchasing access is never a recovery requirement. For
 technical symptoms, use [AI-agent troubleshooting](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/troubleshooting/ai-agents.md).
+
+Useful references:
+
+- [Readme](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/reference/ai/README.md)
+- [Vscode Copilot Student](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/reference/ai/vscode-copilot-student.md)
+- [Zed Openrouter](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/reference/ai/zed-openrouter.md)
+- [Cost Context And Failures](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/reference/ai/cost-context-and-failures.md)
 
 ## Understand Before Accepting AI Output
 
@@ -68,5 +58,6 @@ personal account and for every accepted command and diff.
 
 ## Finish And Continue
 
-Record the selected route and boundaries. Do not commit local editor settings
-or credentials to the passport. Continue with the bounded safe-agent exercise.
+When **Check my work** passes, use **Submit mission** once. The launcher
+publishes only this mission's generated, sanitized submission. Continue when the
+dashboard shows the trusted result; a local check alone is not a pass.

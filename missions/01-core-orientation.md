@@ -2,86 +2,50 @@
 
 ## Outcome
 
-You can identify your assigned route, distinguish local navigation from
-official assessment, submit the first evidence on the correct branch, and
-reopen the passport later without searching through browser history.
+You can identify your assigned route, distinguish local navigation from an
+official result, and reopen the passport without searching browser history.
 
-## Why This Matters
+## Concept
 
 The passport uses several locations for different purposes. The local browser
-remembers where you were, GitHub records submitted work, the automatic check
-reports objective results, and the controller queues the few decisions that
-require human judgment. Mixing those roles can make unfinished work look
-complete.
+remembers where you were, while the trusted GitHub check records whether a
+submitted mission passed. A locally checked box is therefore not an official
+result.
 
-## Before You Start
+## Worked Example
 
-Run `gh passport start` once, then keep that terminal running when the command
-opens this page. The command creates or reuses your personal public exercise
-fork, onboarding branch, and draft assessment pull request. At the top of the
-browser, confirm that the strip says **Your local passport** and names your
-onboarding branch. If it says **Curriculum preview**, return to the terminal,
-enter your local `passport-exercises` folder, and run `gh passport open`.
+The same route reopens locally and GitHub remains the authority for submitted completion.
 
-## Machine And Shell
+A correct example uses these decisions:
 
-Use the local passport in your web browser. For the verification command, use
-the same Windows PowerShell, macOS zsh, or Linux bash terminal from which you
-ran `gh passport open`.
+- **Which source proves that submitted work passed?** The trusted GitHub controller result for the submitted commit.
+- **How do you reopen the real passport later?** Run gh passport open; the launcher uses its local registry.
 
-## Steps
+## Common Trap
 
-1. On the passport dashboard, read the assigned responsibilities and mission
-   sequence. If they do not match your work, do not edit `passport.json`. Open
-   **Request help without posting secrets**, submit one sanitized request, and
-   return later for the asynchronous response.
-2. Open **Assessment pull request** from the dashboard and bookmark it. Keep
-   that draft pull request open throughout onboarding. Do not merge or close it.
-3. Return to the dashboard and select **Edit evidence on GitHub** for this
-   mission.
-4. Before typing, confirm that GitHub shows the branch
-   `onboarding/<your-github-username>`. If it shows another branch, cancel the
-   edit and run `gh passport doctor` in the local terminal.
-5. Complete only the requested fields. Do not include passwords, tokens,
-   recovery codes, private keys, protected research content, or broad logs.
-6. Use the commit message `docs(passport): record orientation evidence` and
-   commit directly to the displayed onboarding branch.
-7. Return to the local dashboard. It may show that the automatic check is
-   still pending; do not submit the same change again.
+Treating a remembered browser page as proof that a mission passed.
 
-## Expected Result
+## Your Action
 
-The evidence commit appears on `onboarding/<your-github-username>`, the draft
-assessment pull request remains open, and the local passport distinguishes
-your last visited page from any result verified on GitHub.
+Confirm the generated route. Then stop the local passport with `Ctrl+C` in its
+terminal and run `gh passport open` from a different folder. The same route
+must reopen.
 
-## Independent Verification
+The passport presents the structured questions and required confirmation in the
+browser. Do not create or edit a submission JSON file by hand.
 
-In the terminal where the passport repository is open, run:
+## Check Your Work
 
-```text
-git status --short --branch
-```
-
-The first line starts with `## onboarding/`. Close the browser tab, rerun
-`gh passport open`, and confirm that the dashboard reopens without requiring a
-new clone. Local navigation may remember this page, but only the GitHub result
-may identify the officially current mission.
-
-## Evidence To Submit
-
-Complete `evidence/core/orientation.md`. Record the assigned responsibilities,
-your operating system, the displayed assessment branch, and the difference
-between local navigation and official completion. Do not include credentials
-or unnecessary personal information.
+Use **Check my work** before submitting. The local verifier checks only the
+bounded activity named above. A score of 80% is required, and every
+safety-critical question must be correct. Failed attempts provide targeted
+feedback and can be retried without penalty.
 
 ## If Blocked
 
-If the repository, pull request, or evidence link does not open, run
-`gh auth status --hostname github.com` and confirm that it names the same
-GitHub account as your personal fork. Then run
-`gh passport doctor` and keep its non-secret check names and statuses. Do not
-delete the folder, regenerate SSH keys, reset Git, or change file permissions.
+If `gh passport open` stops, run `gh passport doctor`. Keep only its non-secret
+check names and statuses. Do not delete the Passport folder, regenerate SSH
+keys, reset Git, or change file permissions.
 Use **Request help without posting secrets** on the dashboard if the named
 recovery step does not resolve the problem. The public issue is assigned to
 the lab maintainer for asynchronous triage; nobody needs to be online when you
@@ -89,18 +53,19 @@ submit it.
 
 Use the [glossary](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/glossary.md) when a term is unfamiliar.
 
+Useful references:
+
+- [Readme](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/README.md)
+- [Glossary](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/glossary.md)
+
 ## Understand Before Accepting AI Output
 
 An AI tool cannot determine which systems, project data, or responsibilities
-your supervisor approved. Do not let it invent access, change the assigned
-branch, edit `passport.json`, or claim that GitHub accepted a commit you did
-not verify.
+your supervisor approved. Do not let it invent access, edit `passport.json`,
+or claim that the trusted check passed when you did not observe that result.
 
 ## Finish And Continue
 
-Wait for the automatic check on the submitted commit, then use
-`gh passport open` and **Sync from GitHub**. The check is scheduled every 15
-minutes and GitHub can start scheduled work later. Do not push a duplicate
-commit merely because the result is not immediate. If the dashboard says
-**Awaiting human review**, the controller has already requested it. Close the
-passport and return later; no appointment or live handoff is required.
+When **Check my work** passes, use **Submit mission** once. The launcher
+publishes only this mission's generated, sanitized submission. Continue when the
+dashboard shows the trusted result; a local check alone is not a pass.

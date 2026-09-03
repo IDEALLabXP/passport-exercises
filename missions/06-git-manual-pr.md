@@ -3,74 +3,136 @@
 ## Outcome
 
 You can make one bounded change manually, inspect it, verify it, commit it with
-a Conventional Commit, publish it, and explain it in the passport pull request.
+a Conventional Commit, publish it, and inspect the resulting practice pull
+request.
 
-## Why This Matters
+## Concept
 
 Agents and IDE buttons are safer after you understand the underlying branch,
 working tree, staged diff, commit, remote branch, and review boundary.
 
-## Before You Start
+## Worked Example
 
-Git identity, GitHub authentication, and access to your personal exercise fork
-must work. Do not use an AI agent for the implementation in this mission.
+The personal practice PR contains only the intended file, a Conventional Commit, and an honest verification record.
 
-## Machine And Shell
+A correct example uses these decisions:
 
-**Your computer - PowerShell, zsh, or bash inside the passport repository.**
-The Git commands below are the same on all three systems.
+- **Which PR do you create manually in this mission?** The personal practice PR shown by the mission.
+- **What must happen immediately before committing?** Inspect git diff --cached and confirm every staged change.
 
-## Steps
+## Common Trap
 
-1. Confirm that you are not on `main`:
+Using the background transport PR as the exercise, or staging every file with git add . before reviewing status.
+
+## Your Action
+
+In the separate practice repository, make the bounded note change, inspect status and both diffs, commit it, push it, and create your first draft PR manually.
+
+**windows / powershell**
+
+```powershell
+git status --short --branch
+```
+
+Expected: A named practice branch is shown; it is not main.
+
+**macos / zsh**
+
+```zsh
+git status --short --branch
+```
+
+Expected: A named practice branch is shown; it is not main.
+
+**linux / bash**
 
 ```bash
 git status --short --branch
 ```
 
-2. Open `workspace/manual_task/README.md` and complete its manual task.
-3. Inspect only the intended files:
+Expected: A named practice branch is shown; it is not main.
 
-```bash
-git status --short
+**windows / powershell**
+
+```powershell
 git diff -- workspace/manual_task
 ```
 
-4. Run the fixture verification command documented in that workspace.
-5. Stage only the intended files and inspect the staged diff:
+Expected: Only the intended unstaged change is shown.
+
+**macos / zsh**
+
+```zsh
+git diff -- workspace/manual_task
+```
+
+Expected: Only the intended unstaged change is shown.
+
+**linux / bash**
 
 ```bash
-git add -- workspace/manual_task/project-note.md evidence/git/manual-pr.md
+git diff -- workspace/manual_task
+```
+
+Expected: Only the intended unstaged change is shown.
+
+**windows / powershell**
+
+```powershell
 git diff --cached --check
+```
+
+Expected: No whitespace error is reported.
+
+**macos / zsh**
+
+```zsh
+git diff --cached --check
+```
+
+Expected: No whitespace error is reported.
+
+**linux / bash**
+
+```bash
+git diff --cached --check
+```
+
+Expected: No whitespace error is reported.
+
+**windows / powershell**
+
+```powershell
 git diff --cached
 ```
 
-6. Commit with a concise `type(scope): summary` subject. Use `test`, `fix`,
-   `feat`, or `docs` only when it describes the actual change.
-7. Push the branch and update the existing draft assessment pull request.
+Expected: The staged diff contains only the intended file.
 
-## Expected Result
+**macos / zsh**
 
-The working tree contains only intentional changes, verification succeeds, the
-commit subject explains the change, and the draft pull request shows the diff.
-
-## Independent Verification
-
-Run:
-
-```bash
-git log -1 --oneline
-git status --short --branch
+```zsh
+git diff --cached
 ```
 
-Compare the local commit with the pull request. Do not report a check as passed
-unless you observed its result.
+Expected: The staged diff contains only the intended file.
 
-## Evidence To Submit
+**linux / bash**
 
-Complete `evidence/git/manual-pr.md` and the pull-request template. Do not paste
-a full AI transcript, credential, unrelated repository history, or local
-configuration.
+```bash
+git diff --cached
+```
+
+Expected: The staged diff contains only the intended file.
+
+The passport presents the structured questions and required confirmation in the
+browser. Do not create or edit a submission JSON file by hand.
+
+## Check Your Work
+
+Use **Check my work** before submitting. The local verifier checks only the
+bounded activity named above. A score of 80% is required, and every
+safety-critical question must be correct. Failed attempts provide targeted
+feedback and can be retried without penalty.
 
 ## If Blocked
 
@@ -79,6 +141,11 @@ Preserve `git status`, the current branch, and the diff, then use the
 [first safe PR lab](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/labs/first-safe-pr.md) recovery section or ask
 for help through the non-secret dashboard issue form.
 
+Useful references:
+
+- [First Safe Pr](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/labs/first-safe-pr.md)
+- [Git_Workflow](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/onboarding_IT_guides/git_workflow.md)
+
 ## Understand Before Accepting AI Output
 
 This mission is deliberately manual. An agent may explain a Git concept but
@@ -86,6 +153,6 @@ must not perform the change, invent test output, or choose files to stage.
 
 ## Finish And Continue
 
-The controller queues the required review automatically. After that
-asynchronous review, Git is established as the manual baseline for optional
-Python and AI-agent missions.
+When **Check my work** passes, use **Submit mission** once. The launcher
+publishes only this mission's generated, sanitized submission. Continue when the
+dashboard shows the trusted result; a local check alone is not a pass.

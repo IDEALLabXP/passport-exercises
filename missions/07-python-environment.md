@@ -5,54 +5,61 @@
 The training project runs in a dedicated environment whose dependencies are
 declared in Git while the environment directory itself remains untracked.
 
-## Why This Matters
+## Concept
 
 Installing packages globally or into `base` makes projects interfere with one
 another and prevents collaborators from reproducing the environment.
 
-## Before You Start
+## Worked Example
 
-Complete the manual Git mission. Install Miniforge using the current
-[Python setup guide](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/onboarding_IT_guides/python_setup.md) if `conda`
-is unavailable.
+Python runs from the project .venv and Git reports that .venv is ignored.
 
-## Machine And Shell
+A correct example uses these decisions:
 
-**Windows computer - Miniforge Prompt or PowerShell initialized for Conda.**
+- **Should .venv be committed?** No. It is reproducible local state and must remain ignored.
+- **What proves the environment is active?** The reported interpreter path is inside the project .venv.
 
-**macOS/Linux computer - zsh or bash initialized for Conda.**
+## Common Trap
 
-## Steps
+Creating the environment in Git-tracked files or installing into an unrelated global interpreter.
 
-From the passport repository, create and activate the dedicated environment:
+## Your Action
 
-```bash
-conda create -n ideal-passport python=3.11 -y
-conda activate ideal-passport
-python --version
-python -c "import sys; print(sys.executable)"
+Create the project virtual environment with the platform-specific command, activate it, and run the interpreter check.
+
+**windows / powershell**
+
+```powershell
+py -3 -m venv .venv
 ```
 
-Open `workspace/python_project`. Install only the dependencies declared by its
-tracked project file, then select the `ideal-passport` interpreter in the
-editor. Do not commit Conda directories, `.venv`, caches, or generated output.
+Expected: .venv is created without overwriting another path.
 
-## Expected Result
+**macos / zsh**
 
-Python reports the intended environment, the fixture imports successfully, and
-`git status --short` does not show an environment directory.
+```zsh
+python3 -m venv .venv
+```
 
-## Independent Verification
+Expected: .venv is created without overwriting another path.
 
-Deactivate and reactivate the environment, then run the documented fixture
-test. Confirm that a clean clone could identify required dependencies from a
-tracked file rather than your machine state.
+**linux / bash**
 
-## Evidence To Submit
+```bash
+python3 -m venv .venv
+```
 
-Complete `evidence/python/environment.md`. Sanitize home-directory components
-from interpreter paths and do not include environment exports containing
-credentials or private package indexes.
+Expected: .venv is created without overwriting another path.
+
+The passport presents the structured questions and required confirmation in the
+browser. Do not create or edit a submission JSON file by hand.
+
+## Check Your Work
+
+Use **Check my work** before submitting. The local verifier checks only the
+bounded activity named above. A score of 80% is required, and every
+safety-critical question must be correct. Failed attempts provide targeted
+feedback and can be retried without penalty.
 
 ## If Blocked
 
@@ -60,6 +67,11 @@ Do not repeatedly reinstall into `base`. Record `conda info --envs`, the Python
 path, and the exact error without credentials. Use the
 [reproducible Python lab](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/labs/reproducible-python.md) or ask for
 help before deleting an existing environment.
+
+Useful references:
+
+- [Python_Setup](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/onboarding_IT_guides/python_setup.md)
+- [Reproducible Python](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/labs/reproducible-python.md)
 
 ## Understand Before Accepting AI Output
 
@@ -69,5 +81,6 @@ before installation.
 
 ## Finish And Continue
 
-Keep `ideal-passport` active for the next bounded Python change and verification
-mission.
+When **Check my work** passes, use **Submit mission** once. The launcher
+publishes only this mission's generated, sanitized submission. Continue when the
+dashboard shows the trusted result; a local check alone is not a pass.

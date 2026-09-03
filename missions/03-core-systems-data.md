@@ -6,55 +6,42 @@ You can place code, durable research data, temporary files, GUI work, and
 compute intentionally instead of treating every available drive or service as
 interchangeable.
 
-## Why This Matters
+## Concept
 
 Git is not a data archive, scratch is not a backup, a laptop is not a shared
 compute node, and an AI provider is not automatically approved for unpublished
 material. Correct placement prevents data loss, leakage, and blocked projects.
 
-## Before You Start
+## Worked Example
 
-Read [Environments overview](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/core/environments-overview.md) and
-[Data and AI safety](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/core/data-and-ai-safety.md). Ask your
-supervisor who owns the project's information decisions.
+The map separates source control, durable storage, temporary storage, GUI access, and scheduled computation.
 
-## Machine And Shell
+A correct example uses these decisions:
 
-**Your computer - web browser or text editor.** This is a planning mission; do
-not move or delete project files while completing it.
+- **Where does maintained source code belong?** In an approved GitHub repository.
+- **Where should a heavy batch computation run?** In a bounded Slurm allocation on Euler or another approved compute system.
+- **Where should an approved collaborative dataset remain authoritative?** In the supervisor-approved durable project location on NAS or another named project store.
+- **What may be placed in scratch storage?** Temporary high-throughput files that can be recreated from recorded inputs.
+- **Where should you use an approved Windows-only engineering GUI?** On Blade for interactive GUI work, while heavy batch computation uses an approved compute system.
+- **What project context may you send to an AI service during onboarding?** Only the fictional fixture provided by the mission, unless the real data owner approved the exact service and content.
 
-## Steps
+## Common Trap
 
-Create a map covering these categories:
+Choosing a location because it is convenient today rather than because its ownership, backup, and lifecycle fit the data.
 
-| Category | Decision to record |
-| --- | --- |
-| Source code and small text | Authoritative repository and access level |
-| Durable research data | Approved NAS or project storage and information owner |
-| Temporary working data | Purge behavior and authoritative copy |
-| CPU/GPU computation | Laptop, Blade, Euler, or another approved system |
-| GUI-only software | Local computer or Blade |
-| AI context | Classification, approved service, minimization, and account |
+## Your Action
 
-For each category, record where the authoritative copy lives, who approves
-access, what is temporary, and how loss is recovered.
+Place each fictional code, dataset, temporary output, GUI task, and compute task on the appropriate system.
 
-## Expected Result
+The passport presents the structured questions and required confirmation in the
+browser. Do not create or edit a submission JSON file by hand.
 
-Every important asset has an owner and authoritative location. Temporary
-locations are labelled, and no system is selected merely because it is easy to
-reach.
+## Check Your Work
 
-## Independent Verification
-
-Ask: “If this laptop or temporary directory disappears today, can the project
-recover?” Every important category must have a concrete answer.
-
-## Evidence To Submit
-
-Complete `evidence/core/systems-data.md` using fictional or project-level
-descriptions. Do not list protected filenames, credentials, personal data, or
-confidential content.
+Use **Check my work** before submitting. The local verifier checks only the
+bounded activity named above. A score of 80% is required, and every
+safety-critical question must be correct. Failed attempts provide targeted
+feedback and can be retried without penalty.
 
 ## If Blocked
 
@@ -62,6 +49,12 @@ Do not guess a storage path or AI approval. Record the unresolved decision and
 ask the project information owner or supervisor. The
 [data and AI policy](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/policy/data-and-ai.md) defines the escalation
 boundary.
+
+Useful references:
+
+- [Environments Overview](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/core/environments-overview.md)
+- [Data And Ai Safety](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/core/data-and-ai-safety.md)
+- [Data And Ai](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/policy/data-and-ai.md)
 
 ## Understand Before Accepting AI Output
 
@@ -71,5 +64,6 @@ data classification all still apply.
 
 ## Finish And Continue
 
-Commit the map and keep it available for the final core review and later data,
-Blade, and Euler missions rather than creating contradictory maps.
+When **Check my work** passes, use **Submit mission** once. The launcher
+publishes only this mission's generated, sanitized submission. Continue when the
+dashboard shows the trusted result; a local check alone is not a pass.

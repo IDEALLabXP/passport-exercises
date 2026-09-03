@@ -1,31 +1,35 @@
 # IDEAL Lab IT Passport Exercises
 
-This public repository contains fictional exercises and empty evidence files
-for the IDEAL Lab IT and Research Computing Passport `1.2.0`.
+This public repository contains fictional exercises and structured mission contracts
+for the IDEAL Lab IT and Research Computing Passport `2.0.0`.
 It contains no student records, research data, credentials, or privileged
 workflow.
 
 ## Start Or Resume
 
 Do not clone this repository manually. Install the public GitHub CLI extension,
-then let it create or reuse your personal fork, assessment branch, and draft
-pull request:
+then let it create or reuse your public learning record:
 
 ```text
-gh extension install soheylm-passport-sandbox/gh-passport --force --pin v0.2.0
+gh extension install soheylm-passport-sandbox/gh-passport --force --pin v0.3.0
 gh passport start
 ```
 
-After setup, run this command from your local `passport-exercises` folder:
+After setup, run this command from any folder:
 
 ```text
 gh passport open
 ```
 
-The browser remembers only local navigation. Your commits and the permanent
-draft pull request are the submitted record. The private IDEAL Lab controller
-publishes automatic checks on that pull request. A final reviewer is requested
-only after all deterministic checks pass.
+The browser remembers local navigation. The launcher writes only the current
+mission's generated submission and declared synthetic exercise files. It never
+stages arbitrary learner files. During the Git mission you create a separate
+practice branch and PR yourself; before that mission, the Git transport stays
+in the background.
+
+The private controller publishes deterministic results on the submitted commit.
+Routine learning does not wait for a person. Only exceptions and real operational
+approvals enter the asynchronous help or approval queues.
 
 If no automatic check appears after 30 minutes, submit one
 [public, non-secret passport help request](https://github.com/soheylm-passport-sandbox/passport-exercises/issues/new?template=passport-help.yml)
@@ -46,11 +50,11 @@ needed and use the lab's private incident channel instead of the pull request.
 ## Repository Boundaries
 
 - `missions/` contains generated fallback instructions and is not editable.
-- `evidence/` contains the short answers checked by the controller.
+- `submissions/` receives launcher-generated structured public submissions.
 - `workspace/` contains bounded fictional files used by practical exercises.
 - `passport-curriculum.json` is the launcher-readable route catalogue.
 - `passport.example.json` documents the format; `gh passport start` creates
-  your actual `passport.json` only on your assessment branch.
+  your actual `passport.json` only on its managed transport branch.
 
 The canonical curriculum and handbook live in
 [`IDEALLab/onboarding-IT`](https://github.com/IDEALLab/onboarding-IT).

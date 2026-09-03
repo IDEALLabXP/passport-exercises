@@ -1,6 +1,6 @@
 {
   "assessment_branch": "onboarding/your-github-username",
-  "curriculum_version": "1.2.0",
+  "curriculum_version": "2.0.0",
   "fork_repository": "YOUR-GITHUB-USERNAME/passport-exercises",
   "github_user": "YOUR-GITHUB-USERNAME",
   "missions": [
@@ -20,6 +20,7 @@
     "euler-cpu-arrays",
     "euler-storage-reproducibility",
     "euler-gpu-review",
+    "nas-access-storage",
     "data-placement",
     "data-collaboration",
     "data-handover",
@@ -36,8 +37,10 @@
     "euler_gpu",
     "data_steward",
     "blade",
-    "supervisor"
+    "supervisor",
+    "nas"
   ],
   "schema_version": 2,
+  "setup_complete": true,
   "source_repository": "soheylm-passport-sandbox/passport-exercises"
 }
