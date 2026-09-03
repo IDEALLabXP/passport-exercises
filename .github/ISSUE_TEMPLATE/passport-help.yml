@@ -20,14 +20,14 @@ body:
       options:
         - The first automatic check has not appeared after 30 minutes
         - gh passport start or open stopped with an error
-        - I accidentally closed the assessment PR
+        - My public learning record needs recovery
         - The controller check reports a non-sensitive problem I do not understand
     validations:
       required: true
   - type: input
     id: pull_request
     attributes:
-      label: Public assessment PR URL
+      label: Public learning-record URL
       description: Paste only the public soheylm-passport-sandbox/passport-exercises PR URL. Leave blank if no PR exists.
   - type: textarea
     id: message

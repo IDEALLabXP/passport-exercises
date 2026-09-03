@@ -6,55 +6,38 @@ You can choose durable, working, scratch, and node-local locations, preserve
 production run identity, and prevent mutable files from changing under queued
 or running jobs.
 
-## Why This Matters
+## Concept
 
 `$SCRATCH` is not a backup and `$TMPDIR` disappears with the job. Slurm captures
 the batch script, not every external code, configuration, model, or input file
 it references.
 
-## Before You Start
+## Worked Example
 
-Know the project information owner and approved Euler project/work location.
-Do not move real data for this planning mission.
+The plan separates Git, approved Euler storage, scratch, and durable results and records enough inputs to rerun the job.
 
-## Machine And Shell
+A correct example uses these decisions:
 
-**Your computer or Euler login node - planning and read-only inspection.** On
-Euler, `printf 'HOME=%s\nSCRATCH=%s\n' "$HOME" "$SCRATCH"` may be used to
-identify paths without changing data.
+- **What is Euler scratch for?** Temporary high-throughput files that can be recreated.
+- **What must a reproducible run identify?** Code revision, environment, immutable inputs, parameters, resources, and outputs.
 
-## Steps
+## Common Trap
 
-Create a storage map for:
+Keeping the only copy in scratch, processing high-I/O workloads directly on an external NAS mount, or changing inputs in place.
 
-1. Git-tracked source and small configuration.
-2. Durable shared project data and final results.
-3. Re-creatable short-term `$SCRATCH` data.
-4. Job-specific `$TMPDIR` input/output.
-5. Logs and checkpoints needed after a failure.
+## Your Action
 
-For a production run, record a clean source revision, declared environment,
-run-specific configuration, immutable input identifier, resource request,
-output directory, and checkpoint policy. Copy required `$TMPDIR` outputs to a
-durable location before job exit.
+Place fictional code, immutable inputs, temporary scratch, durable outputs, environment metadata, and logs in a reproducible run plan.
 
-## Expected Result
+The passport presents the structured questions and required confirmation in the
+browser. Do not create or edit a submission JSON file by hand.
 
-Important data has a durable authoritative copy and recovery owner. Scratch and
-node-local data are explicitly disposable. Queued jobs reference an immutable
-run snapshot rather than a collaborator's changing working directory.
+## Check Your Work
 
-## Independent Verification
-
-For every location, answer: “What happens if this disappears now?” If the only
-copy of important work is scratch, `$TMPDIR`, a laptop, or an uncommitted
-working tree, the map fails.
-
-## Evidence To Submit
-
-Complete `evidence/euler/storage-reproducibility.md` using sanitized logical
-paths. Do not publish private project names, protected filenames, or broad
-directory listings.
+Use **Check my work** before submitting. The local verifier checks only the
+bounded activity named above. A score of 80% is required, and every
+safety-critical question must be correct. Failed attempts provide targeted
+feedback and can be retried without penalty.
 
 ## If Blocked
 
@@ -62,6 +45,12 @@ Do not invent permissions or recursively change a shared tree. Ask the data
 owner about authoritative storage and use
 [Euler storage](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/reference/euler/storage.md) for lifecycle and
 collaboration recovery.
+
+Useful references:
+
+- [Storage](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/reference/euler/storage.md)
+- [Slurm](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/reference/euler/slurm.md)
+- [Data Placement](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/labs/data-placement.md)
 
 ## Understand Before Accepting AI Output
 
@@ -71,6 +60,6 @@ backup.
 
 ## Finish And Continue
 
-The Euler CPU endorsement now has evidence for access, job lifecycle,
-accounting, concurrency, storage, and reproducibility. GPU users continue to a
-static one-GPU review.
+When **Check my work** passes, use **Submit mission** once. The launcher
+publishes only this mission's generated, sanitized submission. Continue when the
+dashboard shows the trusted result; a local check alone is not a pass.

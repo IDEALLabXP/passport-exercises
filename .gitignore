@@ -27,9 +27,11 @@ outputs/
 *.pt
 *.pth
 
-# Versioned fictional exercises, not research datasets
-!evidence/data/
-!evidence/data/*.md
+# The launcher writes bounded public receipts here, never temporary drafts.
+submissions/*.tmp
+
+# The visible Git practice clone is separate from managed transport.
+/practice/
 
 # Operating-system files
 .DS_Store

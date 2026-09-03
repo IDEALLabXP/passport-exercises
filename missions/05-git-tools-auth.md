@@ -3,111 +3,163 @@
 ## Outcome
 
 Your Git commit identity is correct, a supported editor is available, and you
-can verify that the existing passport folder points to your personal public
-fork, the central exercise repository, and your assessment branch.
+can verify the separate practice repository and branch where you will learn
+Git without touching the Passport's background transport.
 
-## Why This Matters
+## Concept
 
 Git records authorship, while GitHub authentication controls repository
 access. They are separate. A correct identity and a verified branch prevent
 misattributed commits and changes in the wrong location.
 
-## Before You Start
+## Worked Example
 
-Complete the universal core and open the existing `passport-exercises` folder
-created by `gh passport start`. Do not clone the repository a second time. If
-you have no local folder, run `gh passport start`; it safely creates or reuses
-the expected fork, folder, branch, and draft pull request.
+Git and GitHub CLI are available, GitHub CLI names the intended account, and Git identity is explicit.
 
-## Machine And Shell
+A correct example uses these decisions:
 
-Use only the block matching your computer. Run it from the existing passport
-repository.
+- **What must gh auth status confirm?** The intended GitHub account is authenticated.
+- **What should you do before repairing a failed tool check?** Read the named check and use its bounded recovery step.
 
-**Windows computer - PowerShell**
+## Common Trap
+
+Changing SSH keys, deleting configuration, or reinstalling everything before reading the exact failed check.
+
+## Your Action
+
+Select **Prepare practice folder** first, then enter the exact folder printed
+by the Passport. Run the read-only tool and identity checks shown below there.
+Fix only a missing name or email through the linked platform guide.
+
+**windows / powershell**
 
 ```powershell
-& .\tools\preflight.ps1
 git --version
-code --version
 ```
 
-**macOS computer - zsh**
+Expected: A Git version is printed.
+
+**macos / zsh**
 
 ```zsh
-zsh tools/preflight.zsh
 git --version
-code --version
 ```
 
-**Linux computer - bash**
+Expected: A Git version is printed.
+
+**linux / bash**
 
 ```bash
-bash tools/preflight.sh
 git --version
-code --version
 ```
 
-The preflight is read-only. It reports availability and SSH configuration
-syntax; it does not install, delete, or rewrite anything. A missing
-`code --version` means the editor still needs installation, not that the
-passport must be cloned again.
+Expected: A Git version is printed.
 
-## Steps
+**windows / powershell**
 
-1. If VS Code is missing, install it through the platform-specific procedure
-   linked from the handbook. Reopen the terminal after installation.
-2. Configure your commit identity with your real name and project-approved
-   email. Replace the example values before running the commands:
-
-```text
-git config --global user.name "Your real name"
-git config --global user.email "Your approved email"
+```powershell
+gh auth status --hostname github.com
 ```
 
-3. Inspect the stored identity without placing credentials in a command:
+Expected: The intended GitHub account is named.
 
-```text
-git config --global --get user.name
-git config --global --get user.email
+**macos / zsh**
+
+```zsh
+gh auth status --hostname github.com
 ```
 
-4. Open the existing folder in VS Code with `code .`, or use **File > Open
-   Folder** and select the existing passport folder.
-5. Verify the repository and branch:
+Expected: The intended GitHub account is named.
 
-```text
+**linux / bash**
+
+```bash
+gh auth status --hostname github.com
+```
+
+Expected: The intended GitHub account is named.
+
+**windows / powershell**
+
+```powershell
+git config --get user.name
+```
+
+Expected: Your chosen commit author name is printed.
+
+**macos / zsh**
+
+```zsh
+git config --get user.name
+```
+
+Expected: Your chosen commit author name is printed.
+
+**linux / bash**
+
+```bash
+git config --get user.name
+```
+
+Expected: Your chosen commit author name is printed.
+
+**windows / powershell**
+
+```powershell
+git config --get user.email
+```
+
+Expected: Your chosen commit author email is printed.
+
+**macos / zsh**
+
+```zsh
+git config --get user.email
+```
+
+Expected: Your chosen commit author email is printed.
+
+**linux / bash**
+
+```bash
+git config --get user.email
+```
+
+Expected: Your chosen commit author email is printed.
+
+**windows / powershell**
+
+```powershell
 git remote -v
-git status --short --branch
 ```
 
-Do not paste a personal access token into a Git URL. Authentication remains in
-GitHub CLI and the operating-system credential store configured during setup.
+Expected: Only expected GitHub remotes appear; no password or token is embedded in a URL.
 
-## Expected Result
+**macos / zsh**
 
-Git and VS Code print versions, the stored identity belongs to you, `origin`
-names `<your-github-username>/passport-exercises`, `upstream` names
-`soheylm-passport-sandbox/passport-exercises`, and the status line starts with
-`## onboarding/<your-github-username>`.
-
-## Independent Verification
-
-Close VS Code, reopen the same existing folder, and run:
-
-```text
-git rev-parse --show-toplevel
-git status --short --branch
+```zsh
+git remote -v
 ```
 
-The first command names the folder you opened and the second still names the
-assigned onboarding branch. Neither output contains a token.
+Expected: Only expected GitHub remotes appear; no password or token is embedded in a URL.
 
-## Evidence To Submit
+**linux / bash**
 
-Complete `evidence/git/tools-auth.md` with sanitized version information, the
-configured name, repository name, and branch status. Remove the email address
-if the reviewer does not need it. Never include credentials.
+```bash
+git remote -v
+```
+
+Expected: Only expected GitHub remotes appear; no password or token is embedded in a URL.
+
+The passport presents the structured questions and required confirmation in the
+browser. Do not create or edit a submission JSON file by hand.
+
+## Check Your Work
+
+Use **Check my work** before submitting. The local verifier checks only the
+bounded activity named above. A score of 80% is required, and every
+safety-critical question must be correct. Failed attempts provide targeted
+feedback and can be retried without penalty.
 
 ## If Blocked
 
@@ -118,6 +170,11 @@ Use **Request help without posting secrets** on the passport dashboard if the
 doctor's named recovery command does not resolve the problem. Submit one
 sanitized issue and return later; the reviewer does not need to be online.
 
+Useful references:
+
+- [Git_Workflow](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/onboarding_IT_guides/git_workflow.md)
+- [Vscode](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/onboarding_IT_guides/vscode.md)
+
 ## Understand Before Accepting AI Output
 
 Do not let an AI assistant insert tokens, rewrite credential helpers, change
@@ -126,6 +183,6 @@ identity, remote, and branch yourself before accepting its claim of success.
 
 ## Finish And Continue
 
-Commit only the requested evidence and bounded exercise files on the assigned
-branch. Review `git diff` before every commit and return to `gh passport open`
-for the next controller-verified mission.
+When **Check my work** passes, use **Submit mission** once. The launcher
+publishes only this mission's generated, sanitized submission. Continue when the
+dashboard shows the trusted result; a local check alone is not a pass.

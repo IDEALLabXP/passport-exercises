@@ -6,25 +6,29 @@ You can correct an unsafe GPU request, justify one explicit model, plan the
 smallest useful smoke test, monitor bottlenecks, and define evidence required
 before multi-GPU scaling.
 
-## Why This Matters
+## Concept
 
 Dataset size does not prove multi-GPU scaling. An idle or CPU/I/O-bound GPU job
 wastes scarce shared resources, and a long interactive tunnel can remain
 allocated after useful work stops.
 
-## Before You Start
+## Worked Example
 
-Pass Euler CPU first and obtain supervisor confirmation that the project has a
-real GPU implementation. This mission is review-only; do not submit a GPU job.
+The parser accepts one explicit GPU, no forced partition, and bounded companion resources; optional live smoke testing remains a separate deliberate action.
 
-## Machine And Shell
+A correct example uses these decisions:
 
-**Your computer - text editor.** The `.slurm.txt` fixture is intentionally
-unsafe training material and must not be submitted.
+- **Which account provides the documented lab GPU access?** The approved es_fuge share.
+- **What should a one-GPU starter request do?** Request one explicit GPU and bounded CPU, memory, and time.
 
-## Steps
+## Common Trap
 
-Correct the fixture to use one supported explicit model and `es_fuge`:
+Assuming GPUs are on the public share, requesting all node CPUs for one GPU, or submitting the review fixture accidentally.
+
+## Your Action
+
+Correct the unsafe one-GPU Slurm fixture for the es_fuge share, choose one approved GPU model, and justify bounded CPU, memory, time, and logs. Do not submit it.
+
 
 <!-- passport-snippet:euler-gpu-4090-starter -->
 ```bash
@@ -35,36 +39,28 @@ Correct the fixture to use one supported explicit model and `es_fuge`:
 ```
 <!-- /passport-snippet:euler-gpu-4090-starter -->
 
-An RTX 3090 may be used as the general fallback by changing only the GPU type
-to `rtx_3090`. The RTX PRO 6000 is special-purpose and requires a documented
-need such as GPU memory beyond 24 GiB plus verified CUDA 13 compatibility.
+The passport presents the structured questions and required confirmation in the
+browser. Do not create or edit a submission JSON file by hand.
 
-Add a short measured time limit, logs, environment setup, executable command,
-monitoring plan, and checkpoint behavior. Do not force a partition unless the
-current canonical policy explicitly requires one.
+## Check Your Work
 
-## Expected Result
-
-The plan uses one GPU, `es_fuge`, bounded time, logs, monitoring, checkpoints,
-and a measurable criterion for scaling. The CPU/memory profile is recognized as
-a starter value to measure, not a universal requirement.
-
-## Independent Verification
-
-Explain the next investigation for low GPU utilization with saturated CPUs,
-low storage throughput, full GPU memory, and only 1.1x throughput on two GPUs.
-The answer must investigate bottlenecks rather than automatically add GPUs.
-
-## Evidence To Submit
-
-Complete `evidence/euler/gpu-review.md` and correct the `.slurm.txt` fixture. No
-live GPU output, allocation, or account history is required.
+Use **Check my work** before submitting. The local verifier checks only the
+bounded activity named above. A score of 100% is required, and every
+safety-critical question must be correct. Failed attempts provide targeted
+feedback and can be retried without penalty.
 
 ## If Blocked
 
 Use the RTX 4090 review baseline. Do not submit duplicate jobs for multiple GPU
 types or select RTX PRO 6000 merely to bypass a queue. Escalate distributed
 training, unusual memory, or CUDA compatibility to the supervisor.
+
+Useful references:
+
+- [Euler Gpu Review](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/labs/euler-gpu-review.md)
+- [Euler Gpu](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/tracks/euler-gpu.md)
+- [Slurm](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/reference/euler/slurm.md)
+- [Euler Share](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/policy/euler-share.md)
 
 ## Understand Before Accepting AI Output
 
@@ -74,5 +70,6 @@ pipeline.
 
 ## Finish And Continue
 
-Human review can grant the initial GPU endorsement without consuming a GPU. A
-later project-specific smoke test is optional, short, and supervisor-approved.
+When **Check my work** passes, use **Submit mission** once. The launcher
+publishes only this mission's generated, sanitized submission. Continue when the
+dashboard shows the trusted result; a local check alone is not a pass.

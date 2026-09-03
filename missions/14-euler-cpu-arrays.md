@@ -6,54 +6,38 @@ You can add an explicit concurrency cap, validate one representative task,
 calculate aggregate resources across overlapping submissions, and cancel failed
 or duplicate arrays.
 
-## Why This Matters
+## Concept
 
 Array size is not concurrency. An uncapped array can make many tasks eligible
 simultaneously, and several individually capped arrays can still exceed a safe
 aggregate request.
 
-## Before You Start
+## Worked Example
 
-Complete one successful single-task job and accounting review. This mission
-uses an explicitly labelled non-submit fixture; a live multi-task array is not
-required.
+The deterministic parser accepts the bounded array and no command submits it to Euler.
 
-## Machine And Shell
+A correct example uses these decisions:
 
-**Your computer - text editor.** Euler commands may be discussed, but do not
-submit `workspace/slurm/array_job.slurm.txt`.
+- **What does %4 mean in --array=0-31%4?** At most four array tasks may run concurrently.
+- **Which placeholders distinguish array logs?** %A for the parent job and %a for the task index.
 
-## Steps
+## Common Trap
 
-Open the fixture and ensure it contains an explicit cap such as:
+Submitting a large array before adding %N, or using %j so tasks overwrite or obscure one another.
 
-```bash
-#SBATCH --array=0-9%1
-```
+## Your Action
 
-Explain why `%1` is the first safe baseline. After one representative task is
-measured, a small justified cap such as `%2` may be reviewed.
+Correct the supplied Slurm array fixture so it has an explicit % concurrency cap and unique parent/task log names.
 
-Calculate concurrent CPUs, memory, and GPUs for the cap. Include every active
-ordinary job and array; two arrays capped at `%2` may make four tasks eligible.
-Use `%A` for the parent array ID and `%a` for each task ID in log filenames.
+The passport presents the structured questions and required confirmation in the
+browser. Do not create or edit a submission JSON file by hand.
 
-## Expected Result
+## Check Your Work
 
-The fixture has an explicit `%` cap, distinct per-task logs, one-task
-validation, aggregate arithmetic, and a cancellation plan. It remains a text
-fixture and is not submitted.
-
-## Independent Verification
-
-Recalculate the aggregate from scratch and explain the difference between 100
-total tasks and two concurrent tasks. State how to inspect your jobs and cancel
-the parent job ID.
-
-## Evidence To Submit
-
-Complete `evidence/euler/arrays.md` and correct the `.slurm.txt` fixture. Do not
-rename it to an executable Slurm script or submit it.
+Use **Check my work** before submitting. The local verifier checks only the
+bounded activity named above. A score of 100% is required, and every
+safety-critical question must be correct. Failed attempts provide targeted
+feedback and can be retried without penalty.
 
 ## If Blocked
 
@@ -62,6 +46,11 @@ identically, cancel the array and debug one task. Use the
 [job arrays lab](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/labs/euler-job-arrays.md) for dependent or
 heterogeneous workloads.
 
+Useful references:
+
+- [Euler Job Arrays](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/labs/euler-job-arrays.md)
+- [Slurm](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/reference/euler/slurm.md)
+
 ## Understand Before Accepting AI Output
 
 Calculate concurrency yourself and include other submissions. A personal or
@@ -69,5 +58,6 @@ lab limit is a ceiling, not a target for an agent to consume.
 
 ## Finish And Continue
 
-Submit the corrected fixture and arithmetic. The next mission maps durable,
-working, scratch, and node-local data and freezes production inputs.
+When **Check my work** passes, use **Submit mission** once. The launcher
+publishes only this mission's generated, sanitized submission. Continue when the
+dashboard shows the trusted result; a local check alone is not a pass.

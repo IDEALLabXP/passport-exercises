@@ -1,192 +1,2566 @@
 {
-  "curriculum_version": "1.2.0",
+  "curriculum_version": "2.0.0",
   "missions": {
     "ai-agent-baseline": {
-      "editable_artifacts": [
-        "workspace/agent_task/storage-plan.md"
-      ],
-      "evidence": [
-        "evidence/ai/agent-baseline.md"
-      ],
-      "human_gate": true,
-      "track": "ai_agents"
+      "activity": {
+        "action": "Give an agent one bounded fictional task, inspect every changed file and command, reject one unsuitable suggestion, then run the checks yourself.",
+        "commands": [
+          {
+            "command": "git status --short -- workspace/agent_task",
+            "expected": "Only workspace/agent_task/storage-plan.md is modified.",
+            "platform": "windows",
+            "shell": "powershell"
+          },
+          {
+            "command": "git status --short -- workspace/agent_task",
+            "expected": "Only workspace/agent_task/storage-plan.md is modified.",
+            "platform": "macos",
+            "shell": "zsh"
+          },
+          {
+            "command": "git status --short -- workspace/agent_task",
+            "expected": "Only workspace/agent_task/storage-plan.md is modified.",
+            "platform": "linux",
+            "shell": "bash"
+          },
+          {
+            "command": "git diff -- workspace/agent_task",
+            "expected": "Only the intended storage-plan change is shown; canary files are untouched.",
+            "platform": "windows",
+            "shell": "powershell"
+          },
+          {
+            "command": "git diff -- workspace/agent_task",
+            "expected": "Only the intended storage-plan change is shown; canary files are untouched.",
+            "platform": "macos",
+            "shell": "zsh"
+          },
+          {
+            "command": "git diff -- workspace/agent_task",
+            "expected": "Only the intended storage-plan change is shown; canary files are untouched.",
+            "platform": "linux",
+            "shell": "bash"
+          }
+        ],
+        "expected_result": "The fixture is corrected, the canary remains unchanged, the bounded verifier passes, and the submission records human review rather than a transcript.",
+        "kind": "repository_task",
+        "machine": "local",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "One bounded outcome with explicit files, constraints, and verification.",
+            "id": "agent_scope",
+            "options": [
+              {
+                "id": "correct",
+                "label": "One bounded outcome with explicit files, constraints, and verification."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Improve everything in the repository."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Run any command needed without review."
+              }
+            ],
+            "prompt": "What is a safe agent task?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "You do, even if the agent reports success.",
+            "id": "agent_result",
+            "options": [
+              {
+                "id": "correct",
+                "label": "You do, even if the agent reports success."
+              },
+              {
+                "id": "wrong_a",
+                "label": "The model provider."
+              },
+              {
+                "id": "wrong_b",
+                "label": "The controller without seeing the files."
+              }
+            ],
+            "prompt": "Who verifies the final diff and tests?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "powershell",
+          "zsh",
+          "bash"
+        ]
+      },
+      "review_policy": "exception_only",
+      "submission": {
+        "artifact_paths": [
+          "workspace/agent_task/storage-plan.md"
+        ],
+        "path": "submissions/ai-agent-baseline.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Use A Safe Agent Loop After The Manual Baseline",
+      "track": "ai_agents",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "ai_project",
+        "pass_percent": 80,
+        "receipt_checks": [
+          "bounded_file",
+          "bounded_diff",
+          "canary_unchanged",
+          "durable_p",
+          "temporary_d",
+          "avoid_c",
+          "heavy_compute"
+        ],
+        "remote_assessor": "ai_project",
+        "requires_live_confirmation": false
+      }
     },
     "ai-tool-configuration": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/ai/tool-configuration.md"
-      ],
-      "human_gate": false,
-      "track": "ai_agents"
+      "activity": {
+        "action": "Identify the model, provider or gateway, agent harness, interface, and tool protocol in the fictional setup, then configure one approved access route without storing a key in the repository.",
+        "commands": [],
+        "expected_result": "The components are classified correctly and no credential appears in a file, prompt, screenshot, or Git diff.",
+        "kind": "guided_local",
+        "machine": "local",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "A provider or gateway for model access, routing, billing, and limits.",
+            "id": "gateway_role",
+            "options": [
+              {
+                "id": "correct",
+                "label": "A provider or gateway for model access, routing, billing, and limits."
+              },
+              {
+                "id": "wrong_a",
+                "label": "A coding agent that edits the repository."
+              },
+              {
+                "id": "wrong_b",
+                "label": "A local Git client."
+              }
+            ],
+            "prompt": "What is OpenRouter in this stack?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "In the supported operating-system keychain or approved secret store.",
+            "id": "key_storage",
+            "options": [
+              {
+                "id": "correct",
+                "label": "In the supported operating-system keychain or approved secret store."
+              },
+              {
+                "id": "wrong_a",
+                "label": "In settings.json committed to Git."
+              },
+              {
+                "id": "wrong_b",
+                "label": "In the PR description."
+              }
+            ],
+            "prompt": "Where may an API key be stored?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "none"
+        ]
+      },
+      "review_policy": "automatic",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/ai-tool-configuration.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Choose And Configure An AI Access Route",
+      "track": "ai_agents",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "ai_configuration",
+        "pass_percent": 100,
+        "receipt_checks": [
+          "structured_activity"
+        ],
+        "remote_assessor": "structured_answers",
+        "requires_live_confirmation": false
+      }
     },
     "blade-access-storage": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/blade/access-storage.md"
-      ],
-      "human_gate": true,
-      "track": "blade"
+      "activity": {
+        "action": "Connect by RDP, confirm the Blade host and GPU, create a harmless temporary receipt on D:, copy it to your approved P: username folder, verify it, and remove the D: copy.",
+        "commands": [],
+        "expected_result": "The durable copy remains on P:, D: is clean, C: was not used, and no heavy unattended compute was started.",
+        "kind": "guided_remote",
+        "machine": "blade",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "In the approved P: supervisor and username folder.",
+            "id": "blade_durable",
+            "options": [
+              {
+                "id": "correct",
+                "label": "In the approved P: supervisor and username folder."
+              },
+              {
+                "id": "wrong_a",
+                "label": "On C: Desktop."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Only on D: temporary storage."
+              }
+            ],
+            "prompt": "Where does durable Blade project work belong?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Interactive Windows GUI software and light prototyping.",
+            "id": "blade_compute",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Interactive Windows GUI software and light prototyping."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Unscheduled overnight GPU training."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Replacing Euler for batch computation."
+              }
+            ],
+            "prompt": "What is Blade primarily for?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "powershell"
+        ]
+      },
+      "review_policy": "automatic",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/blade-access-storage.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Use Blade For GUI Work Without Losing Data",
+      "track": "blade",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "blade_receipt",
+        "pass_percent": 100,
+        "receipt_checks": [
+          "correct_host",
+          "durable_copy",
+          "temporary_removed",
+          "avoided_c_drive"
+        ],
+        "remote_assessor": "blade_receipt",
+        "requires_live_confirmation": true
+      }
     },
     "core-accounts-secrets": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/core/accounts-secrets.md"
-      ],
-      "human_gate": false,
-      "track": "core"
+      "activity": {
+        "action": "Classify the account and secret scenarios, then choose the safe response for each one.",
+        "commands": [],
+        "expected_result": "Every credential-critical answer is correct before the mission can pass.",
+        "kind": "knowledge_check",
+        "machine": "browser",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Revoke or rotate it, then report through the private incident path.",
+            "id": "exposed_token",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Revoke or rotate it, then report through the private incident path."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Delete the visible message and continue."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Post the token in the public learning record for diagnosis."
+              }
+            ],
+            "prompt": "A token may have been exposed. What comes first?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Only the public key ending in .pub.",
+            "id": "ssh_identity",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Only the public key ending in .pub."
+              },
+              {
+                "id": "wrong_a",
+                "label": "The private key without .pub."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Either file if it has a passphrase."
+              }
+            ],
+            "prompt": "Which SSH file may be shared with a service?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Verify MFA in your own account settings and never publish one-time or recovery codes.",
+            "id": "mfa_status",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Check the authentication status in your own GitHub security settings; never submit a recovery code."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Paste a one-time code into the public learning record."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Send a screenshot containing recovery codes."
+              }
+            ],
+            "prompt": "How should you verify GitHub MFA without exposing a secret?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "none"
+        ]
+      },
+      "review_policy": "automatic",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/core-accounts-secrets.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Protect Accounts And Secrets",
+      "track": "core",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "knowledge_check",
+        "pass_percent": 100,
+        "receipt_checks": [
+          "structured_activity"
+        ],
+        "remote_assessor": "structured_answers",
+        "requires_live_confirmation": false
+      }
     },
     "core-incidents-ai-responsibility": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/core/incidents-ai.md"
-      ],
-      "human_gate": true,
-      "track": "core"
+      "activity": {
+        "action": "Resolve four fictional scenarios covering incident order, AI accountability, an uncontrolled Euler job, and lost scratch data.",
+        "commands": [],
+        "expected_result": "The answer preserves evidence, contains risk, uses the private reporting path, and leaves accountability with a person.",
+        "kind": "knowledge_check",
+        "machine": "browser",
+        "questions": [
+          {
+            "answer": [
+              "step_1",
+              "step_2",
+              "step_3",
+              "step_4"
+            ],
+            "critical": true,
+            "feedback": "Use the safe sequence shown in the mission, without skipping verification.",
+            "id": "incident_order",
+            "options": [
+              {
+                "id": "step_1",
+                "label": "Stop the risky action and preserve evidence."
+              },
+              {
+                "id": "step_2",
+                "label": "Contain or revoke what can cause further harm."
+              },
+              {
+                "id": "step_3",
+                "label": "Report through the private incident path."
+              },
+              {
+                "id": "step_4",
+                "label": "Document verified facts and follow-up."
+              }
+            ],
+            "prompt": "Put the first incident-response actions in order.",
+            "type": "order"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "The person who authorized and reviewed the action.",
+            "id": "ai_owner",
+            "options": [
+              {
+                "id": "correct",
+                "label": "The person who authorized and reviewed the action."
+              },
+              {
+                "id": "wrong_a",
+                "label": "The model provider."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Nobody if the agent ran it automatically."
+              }
+            ],
+            "prompt": "Who owns an action taken by an AI coding agent?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "step_1",
+              "step_2",
+              "step_3"
+            ],
+            "critical": true,
+            "feedback": "Stop the known job, verify its state, then diagnose before any new submission.",
+            "id": "runaway_job",
+            "options": [
+              {
+                "id": "step_1",
+                "label": "Record the job ID and stop it with scancel."
+              },
+              {
+                "id": "step_2",
+                "label": "Confirm with squeue or sacct that it stopped."
+              },
+              {
+                "id": "step_3",
+                "label": "Inspect the script and first meaningful error before resubmitting."
+              }
+            ],
+            "prompt": "A mistaken Euler job is consuming resources. Put the immediate actions in order.",
+            "type": "order"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Scratch is not an authoritative copy; preserve remaining evidence, report the loss, and recover or rerun transparently.",
+            "id": "scratch_loss",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Stop creating new files there, check approved recovery options, report the loss, and reconstruct only from recorded inputs if possible."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Claim that scratch is backed up and wait for automatic recovery."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Hide the loss and regenerate different results without recording it."
+              }
+            ],
+            "prompt": "The only copy of a result was left in scratch and is now missing. What is the honest response?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "none"
+        ]
+      },
+      "review_policy": "automatic",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/core-incidents-ai-responsibility.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Respond To Incidents And Own Automated Work",
+      "track": "core",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "incident_response",
+        "pass_percent": 100,
+        "receipt_checks": [
+          "structured_activity"
+        ],
+        "remote_assessor": "structured_answers",
+        "requires_live_confirmation": false
+      }
     },
     "core-orientation": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/core/orientation.md"
-      ],
-      "human_gate": false,
-      "track": "core"
+      "activity": {
+        "action": "Select your work responsibilities, confirm the generated route, close the tab, and resume it from the launcher.",
+        "commands": [],
+        "expected_result": "The same route reopens locally and GitHub remains the authority for submitted completion.",
+        "kind": "knowledge_check",
+        "machine": "browser",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "The trusted GitHub controller result for the submitted commit.",
+            "id": "status_source",
+            "options": [
+              {
+                "id": "correct",
+                "label": "The trusted GitHub controller result for the submitted commit."
+              },
+              {
+                "id": "wrong_a",
+                "label": "The page stored in local browser history."
+              },
+              {
+                "id": "wrong_b",
+                "label": "A checked box in the local interface."
+              }
+            ],
+            "prompt": "Which source proves that submitted work passed?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "Run gh passport open; the launcher uses its local registry.",
+            "id": "resume_path",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Run gh passport open; the launcher uses its local registry."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Create a new fork and branch."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Find an old loopback URL in browser history."
+              }
+            ],
+            "prompt": "How do you reopen the real passport later?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "none"
+        ]
+      },
+      "review_policy": "automatic",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/core-orientation.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Start And Resume Your Passport",
+      "track": "core",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "route_resume",
+        "pass_percent": 80,
+        "receipt_checks": [
+          "resumed_session"
+        ],
+        "remote_assessor": "structured_answers",
+        "requires_live_confirmation": false
+      }
     },
     "core-systems-data": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/core/systems-data.md"
-      ],
-      "human_gate": false,
-      "track": "core"
+      "activity": {
+        "action": "Place each fictional code, dataset, temporary output, GUI task, and compute task on the appropriate system.",
+        "commands": [],
+        "expected_result": "The map separates source control, durable storage, temporary storage, GUI access, and scheduled computation.",
+        "kind": "knowledge_check",
+        "machine": "browser",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "In an approved GitHub repository.",
+            "id": "source_code",
+            "options": [
+              {
+                "id": "correct",
+                "label": "In an approved GitHub repository."
+              },
+              {
+                "id": "wrong_a",
+                "label": "In a shared NAS Git working tree."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Only in a Blade Desktop folder."
+              }
+            ],
+            "prompt": "Where does maintained source code belong?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "In a bounded Slurm allocation on Euler or another approved compute system.",
+            "id": "heavy_compute",
+            "options": [
+              {
+                "id": "correct",
+                "label": "In a bounded Slurm allocation on Euler or another approved compute system."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Directly on an Euler login node."
+              },
+              {
+                "id": "wrong_b",
+                "label": "On Blade overnight without an allocation."
+              }
+            ],
+            "prompt": "Where should a heavy batch computation run?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Keep the authoritative copy in the supervisor-approved durable project location.",
+            "id": "durable_dataset",
+            "options": [
+              {
+                "id": "correct",
+                "label": "In the supervisor-approved durable project location on NAS or another named project store."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Only in a student's Downloads folder."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Only in Euler scratch."
+              }
+            ],
+            "prompt": "Where should an approved collaborative dataset remain authoritative?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Scratch is temporary; anything there must be reproducible or copied to approved durable storage.",
+            "id": "scratch_role",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Temporary high-throughput files that can be recreated from recorded inputs."
+              },
+              {
+                "id": "wrong_a",
+                "label": "The only copy of a thesis dataset."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Long-term project records with no owner."
+              }
+            ],
+            "prompt": "What may be placed in scratch storage?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "Blade provides interactive GUI access; it does not replace scheduled heavy compute.",
+            "id": "gui_task",
+            "options": [
+              {
+                "id": "correct",
+                "label": "On Blade for interactive GUI work, while heavy batch computation uses an approved compute system."
+              },
+              {
+                "id": "wrong_a",
+                "label": "On an Euler login node."
+              },
+              {
+                "id": "wrong_b",
+                "label": "On Blade overnight for unrestricted batch computation."
+              }
+            ],
+            "prompt": "Where should you use an approved Windows-only engineering GUI?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Use the fictional fixture; real protected context requires prior approval for the exact service and content.",
+            "id": "ai_context",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Only the fictional fixture provided by the mission, unless the real data owner approved the exact service and content."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Any unpublished dataset if the model promises not to train on it."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Secrets are acceptable if removed from the final answer."
+              }
+            ],
+            "prompt": "What project context may you send to an AI service during onboarding?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "none"
+        ]
+      },
+      "review_policy": "automatic",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/core-systems-data.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Map Systems And Research Data",
+      "track": "core",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "system_map",
+        "pass_percent": 80,
+        "receipt_checks": [
+          "structured_activity"
+        ],
+        "remote_assessor": "structured_answers",
+        "requires_live_confirmation": false
+      }
     },
     "data-collaboration": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/data/collaboration.md"
-      ],
-      "human_gate": false,
-      "track": "data_steward"
+      "activity": {
+        "action": "Choose permissions, ownership, write boundaries, and recovery rules for a fictional shared dataset and checkpoint collection.",
+        "commands": [],
+        "expected_result": "Collaborators have the minimum required access, shared data has an owner, and each developer keeps a separate Git clone.",
+        "kind": "structured_plan",
+        "machine": "browser",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "Each uses a separate clone and collaborates through branches and PRs.",
+            "id": "git_clones",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Each uses a separate clone and collaborates through branches and PRs."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Everyone edits one Git working tree on shared storage."
+              },
+              {
+                "id": "wrong_b",
+                "label": "They exchange .git directories."
+              }
+            ],
+            "prompt": "How should several students collaborate on code?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Inspect owner, group, ACL, and intended boundary before making a narrow change.",
+            "id": "permission_fix",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Inspect owner, group, ACL, and intended boundary before making a narrow change."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Run chmod -R 777."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Copy all data into a public repository."
+              }
+            ],
+            "prompt": "What is the safe response to a shared-folder permission problem?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "none"
+        ]
+      },
+      "review_policy": "automatic",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/data-collaboration.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Design Safe Shared Data Collaboration",
+      "track": "data_steward",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "data_plan",
+        "pass_percent": 80,
+        "receipt_checks": [
+          "structured_activity"
+        ],
+        "remote_assessor": "structured_answers",
+        "requires_live_confirmation": false
+      }
     },
     "data-handover": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/data/handover.md"
-      ],
-      "human_gate": true,
-      "track": "data_steward"
+      "activity": {
+        "action": "Complete the generated handover document with fictional ownership, locations, code revision, environment, access, retention, and deletion decisions.",
+        "commands": [],
+        "expected_result": "Another authorized person could locate, verify, rerun, and safely retire the fictional project without hidden personal dependencies.",
+        "kind": "structured_plan",
+        "machine": "browser",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "An authorized successor can locate, verify, rerun, and maintain or retire the work.",
+            "id": "handover_goal",
+            "options": [
+              {
+                "id": "correct",
+                "label": "An authorized successor can locate, verify, rerun, and maintain or retire the work."
+              },
+              {
+                "id": "wrong_a",
+                "label": "A zip file exists on one laptop."
+              },
+              {
+                "id": "wrong_b",
+                "label": "The original researcher remembers the setup."
+              }
+            ],
+            "prompt": "What is a successful handover?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Rotate or provision access through approved channels; never place secrets in the document.",
+            "id": "secret_transfer",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Rotate or provision access through approved channels; never place secrets in the document."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Paste them into the handover appendix."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Commit them temporarily."
+              }
+            ],
+            "prompt": "How are credentials handled in a handover?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "none"
+        ]
+      },
+      "review_policy": "exception_only",
+      "submission": {
+        "artifact_paths": [
+          "workspace/handover/project-handover.md"
+        ],
+        "path": "submissions/data-handover.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Create A Recoverable Project Handover",
+      "track": "data_steward",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "handover_document",
+        "pass_percent": 80,
+        "receipt_checks": [
+          "owners",
+          "code_revision",
+          "data_locations",
+          "environment",
+          "reproduction",
+          "retention",
+          "no_placeholders"
+        ],
+        "remote_assessor": "handover_document",
+        "requires_live_confirmation": false
+      }
     },
     "data-placement": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/data/placement.md"
-      ],
-      "human_gate": false,
-      "track": "data_steward"
+      "activity": {
+        "action": "Classify each fictional file by sensitivity, owner, durability, collaboration need, compute locality, and retention before choosing a storage location.",
+        "commands": [],
+        "expected_result": "Every placement has a reason and no sensitive or durable data is assigned to an unapproved temporary location.",
+        "kind": "structured_plan",
+        "machine": "browser",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "No; use the supervisor-approved data location and version metadata instead.",
+            "id": "dataset_git",
+            "options": [
+              {
+                "id": "correct",
+                "label": "No; use the supervisor-approved data location and version metadata instead."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Yes if Git can upload it."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Yes if it is compressed."
+              }
+            ],
+            "prompt": "Should a research dataset be committed to the exercise or code repository?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "Copy it to the approved durable project location and remove the temporary copy when appropriate.",
+            "id": "temporary_copy",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Copy it to the approved durable project location and remove the temporary copy when appropriate."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Leave the only copy there."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Email it to yourself."
+              }
+            ],
+            "prompt": "What must happen to required output created on temporary storage?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "none"
+        ]
+      },
+      "review_policy": "automatic",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/data-placement.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Place Research Data Intentionally",
+      "track": "data_steward",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "data_plan",
+        "pass_percent": 100,
+        "receipt_checks": [
+          "structured_activity"
+        ],
+        "remote_assessor": "structured_answers",
+        "requires_live_confirmation": false
+      }
     },
     "euler-access-ssh": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/euler/access-ssh.md"
-      ],
-      "human_gate": false,
-      "track": "euler_cpu"
+      "activity": {
+        "action": "Use the read-only SSH preflight first. If a key is missing, follow the no-overwrite platform procedure, preview the config, validate with ssh -G, then test key-only access.",
+        "commands": [
+          {
+            "command": "ssh -G euler | Select-Object -First 40",
+            "expected": "OpenSSH parses the configuration without an error.",
+            "platform": "windows",
+            "shell": "powershell"
+          },
+          {
+            "command": "ssh -o PreferredAuthentications=publickey -o PasswordAuthentication=no euler \"echo config-ok\"",
+            "expected": "After the key passphrase, the remote command prints config-ok without an ETH password prompt.",
+            "platform": "windows",
+            "shell": "powershell"
+          },
+          {
+            "command": "ssh -G euler | sed -n '1,40p'",
+            "expected": "OpenSSH parses the configuration without an error.",
+            "platform": "macos",
+            "shell": "zsh"
+          },
+          {
+            "command": "ssh -o PreferredAuthentications=publickey -o PasswordAuthentication=no euler \"echo config-ok\"",
+            "expected": "After the key passphrase, the remote command prints config-ok without an ETH password prompt.",
+            "platform": "macos",
+            "shell": "zsh"
+          },
+          {
+            "command": "ssh -G euler | sed -n '1,40p'",
+            "expected": "OpenSSH parses the configuration without an error.",
+            "platform": "linux",
+            "shell": "bash"
+          },
+          {
+            "command": "ssh -o PreferredAuthentications=publickey -o PasswordAuthentication=no euler \"echo config-ok\"",
+            "expected": "After the key passphrase, the remote command prints config-ok without an ETH password prompt.",
+            "platform": "linux",
+            "shell": "bash"
+          }
+        ],
+        "expected_result": "Key-only SSH prints config-ok; IdentityFile names a private key, never a .pub file, and no existing key was overwritten.",
+        "kind": "guided_local",
+        "machine": "local",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "The private key path without .pub.",
+            "id": "identity_file",
+            "options": [
+              {
+                "id": "correct",
+                "label": "The private key path without .pub."
+              },
+              {
+                "id": "wrong_a",
+                "label": "The public key ending in .pub."
+              },
+              {
+                "id": "wrong_b",
+                "label": "The known_hosts file."
+              }
+            ],
+            "prompt": "Which file must IdentityFile reference?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Stop, back it up, inspect it, and avoid overwriting.",
+            "id": "repair_rule",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Stop, back it up, inspect it, and avoid overwriting."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Delete the entire .ssh directory."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Disable key-only authentication."
+              }
+            ],
+            "prompt": "What is the safe default when a target key or config already exists?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "powershell",
+          "zsh",
+          "bash"
+        ]
+      },
+      "review_policy": "automatic",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/euler-access-ssh.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Establish Safe Euler SSH Access",
+      "track": "euler_cpu",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "ssh_config",
+        "pass_percent": 100,
+        "receipt_checks": [
+          "key_only_marker"
+        ],
+        "remote_assessor": "ssh_config",
+        "requires_live_confirmation": true
+      }
     },
     "euler-cpu-accounting": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/euler/accounting.md"
-      ],
-      "human_gate": false,
-      "track": "euler_cpu"
+      "activity": {
+        "action": "Inspect the recorded tiny-job sacct and seff output, then choose a justified next CPU, memory, and time request.",
+        "commands": [
+          {
+            "command": "read -r -p 'Job ID from the previous mission: ' job_id\nsacct -X -j \"$job_id\" --format=JobID,State,ExitCode,Elapsed,AllocCPUS,ReqMem,MaxRSS\nseff \"$job_id\"",
+            "expected": "The same completed job appears in sacct, followed by its requested-versus-used efficiency summary.",
+            "platform": "euler",
+            "shell": "bash"
+          }
+        ],
+        "expected_result": "The proposed request follows measured utilization and does not enlarge resources merely to hide an error.",
+        "kind": "guided_remote",
+        "machine": "euler",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "MaxRSS, interpreted with the job steps and units.",
+            "id": "memory_measure",
+            "options": [
+              {
+                "id": "correct",
+                "label": "MaxRSS, interpreted with the job steps and units."
+              },
+              {
+                "id": "wrong_a",
+                "label": "ReqMem alone."
+              },
+              {
+                "id": "wrong_b",
+                "label": "The number of queued jobs."
+              }
+            ],
+            "prompt": "Which value helps estimate memory actually used?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Fix and test the software environment before changing resources.",
+            "id": "failed_job",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Fix and test the software environment before changing resources."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Double memory and time."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Request a GPU."
+              }
+            ],
+            "prompt": "A job exits immediately with a Python import error. What should you optimize first?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Reduce the apparently serial CPU request, keep measured memory headroom, and use a bounded time margin on representative input.",
+            "id": "right_size",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Test 1 CPU, 16 GiB total memory, and 45 minutes on a representative input."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Request 8 CPUs, 128 GiB, and 8 hours to be safe."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Request a GPU because CPU efficiency was low."
+              }
+            ],
+            "prompt": "A representative serial job requested 4 CPUs, 16 GiB per CPU, and 2 hours. It completed in 20 minutes with 22% CPU efficiency and 9 GiB MaxRSS. Which next test is justified?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "bash"
+        ]
+      },
+      "review_policy": "automatic",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/euler-cpu-accounting.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Measure And Right-Size An Euler Job",
+      "track": "euler_cpu",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "euler_accounting",
+        "pass_percent": 80,
+        "receipt_checks": [
+          "job_id",
+          "sacct_seen",
+          "seff_seen"
+        ],
+        "remote_assessor": "euler_accounting",
+        "requires_live_confirmation": true
+      }
     },
     "euler-cpu-arrays": {
-      "editable_artifacts": [
-        "workspace/slurm/array_job.slurm.txt"
-      ],
-      "evidence": [
-        "evidence/euler/arrays.md"
-      ],
-      "human_gate": false,
-      "track": "euler_cpu"
+      "activity": {
+        "action": "Correct the supplied Slurm array fixture so it has an explicit % concurrency cap and unique parent/task log names.",
+        "commands": [],
+        "expected_result": "The deterministic parser accepts the bounded array and no command submits it to Euler.",
+        "kind": "repository_task",
+        "machine": "local",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "At most four array tasks may run concurrently.",
+            "id": "array_cap",
+            "options": [
+              {
+                "id": "correct",
+                "label": "At most four array tasks may run concurrently."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Each task receives four CPUs."
+              },
+              {
+                "id": "wrong_b",
+                "label": "The array repeats four times."
+              }
+            ],
+            "prompt": "What does %4 mean in --array=0-31%4?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "%A for the parent job and %a for the task index.",
+            "id": "array_logs",
+            "options": [
+              {
+                "id": "correct",
+                "label": "%A for the parent job and %a for the task index."
+              },
+              {
+                "id": "wrong_a",
+                "label": "%u and %h."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Only %j in one shared file."
+              }
+            ],
+            "prompt": "Which placeholders distinguish array logs?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "powershell",
+          "zsh",
+          "bash"
+        ]
+      },
+      "review_policy": "automatic",
+      "submission": {
+        "artifact_paths": [
+          "workspace/slurm/array_job.slurm.txt"
+        ],
+        "path": "submissions/euler-cpu-arrays.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Cap And Calculate Euler Job Arrays",
+      "track": "euler_cpu",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "slurm_script",
+        "pass_percent": 100,
+        "receipt_checks": [
+          "bounded_file",
+          "required_1",
+          "required_2",
+          "forbidden_1_absent"
+        ],
+        "remote_assessor": "slurm_array",
+        "requires_live_confirmation": false
+      }
     },
     "euler-cpu-first-job": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/euler/first-job.md"
-      ],
-      "human_gate": false,
-      "track": "euler_cpu"
+      "activity": {
+        "action": "Submit the provided two-minute, one-CPU script once; capture its job ID; inspect squeue; then inspect its output, sacct, and seff after completion.",
+        "commands": [
+          {
+            "command": "mkdir -p \"$HOME/passport-euler/logs\"\ncd \"$HOME/passport-euler\"\ncat > first-job.slurm <<'EOF'\n#!/usr/bin/env bash\n#SBATCH --job-name=passport-cpu\n#SBATCH --account=es_fuge\n#SBATCH --time=00:02:00\n#SBATCH --ntasks=1\n#SBATCH --cpus-per-task=1\n#SBATCH --mem-per-cpu=1G\n#SBATCH --output=logs/%x_%j.out\n#SBATCH --error=logs/%x_%j.err\n\nset -euo pipefail\necho \"job_id=$SLURM_JOB_ID\"\necho \"host=$(hostname)\"\necho \"cpus=$SLURM_CPUS_PER_TASK\"\nfor number in 1 2 3 4 5; do\n  printf '%s squared is %s\\n' \"$number\" \"$((number * number))\"\ndone\nEOF\nbash -n first-job.slurm\nsed -n '1,80p' first-job.slurm",
+            "expected": "The complete bounded script is printed with account es_fuge, one CPU, 1 GiB per CPU, and a two-minute limit.",
+            "platform": "euler",
+            "shell": "bash"
+          },
+          {
+            "command": "cd \"$HOME/passport-euler\" || exit 1\njob_id=\"$(sbatch --parsable first-job.slurm)\"\nprintf 'Submitted job: %s\\n' \"$job_id\"",
+            "expected": "A numeric job ID is printed once.",
+            "platform": "euler",
+            "shell": "bash"
+          },
+          {
+            "command": "squeue -j \"$job_id\"",
+            "expected": "The job is pending/running, or the header alone indicates it already left the queue.",
+            "platform": "euler",
+            "shell": "bash"
+          },
+          {
+            "command": "sacct -X -j \"$job_id\" --format=JobID,User,Account,State,ExitCode,Elapsed,AllocCPUS,ReqMem,MaxRSS",
+            "expected": "The main job is owned by you, uses es_fuge, and eventually shows COMPLETED with exit code 0:0.",
+            "platform": "euler",
+            "shell": "bash"
+          },
+          {
+            "command": "seff \"$job_id\"",
+            "expected": "The report names the same job and shows its CPU and memory use.",
+            "platform": "euler",
+            "shell": "bash"
+          },
+          {
+            "command": "grep -Fx '5 squared is 25' \"$HOME/passport-euler/logs/passport-cpu_${job_id}.out\"",
+            "expected": "Exactly 5 squared is 25 is printed.",
+            "platform": "euler",
+            "shell": "bash"
+          }
+        ],
+        "expected_result": "The job completes on a compute node with one CPU, 1 GiB per CPU, no GPU, a zero exit code, and bounded logs.",
+        "kind": "guided_remote",
+        "machine": "euler",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "On a Slurm-allocated compute node.",
+            "id": "login_node",
+            "options": [
+              {
+                "id": "correct",
+                "label": "On a Slurm-allocated compute node."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Directly on the shared login node."
+              },
+              {
+                "id": "wrong_b",
+                "label": "On the local browser."
+              }
+            ],
+            "prompt": "Where does the actual computation run?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "Use sacct and inspect the job logs; it may already have finished.",
+            "id": "empty_queue",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Use sacct and inspect the job logs; it may already have finished."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Submit several duplicates."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Increase memory immediately."
+              }
+            ],
+            "prompt": "The job is absent from squeue. What next?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "bash"
+        ]
+      },
+      "review_policy": "automatic",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/euler-cpu-first-job.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Submit And Control A Tiny Euler CPU Job",
+      "track": "euler_cpu",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "euler_job",
+        "pass_percent": 100,
+        "receipt_checks": [
+          "job_id",
+          "correct_account",
+          "owner_checked",
+          "queue_inspected",
+          "completed",
+          "zero_exit",
+          "one_cpu",
+          "one_gib_per_cpu",
+          "seff_inspected",
+          "output_verified"
+        ],
+        "remote_assessor": "euler_job",
+        "requires_live_confirmation": true
+      }
     },
     "euler-gpu-review": {
-      "editable_artifacts": [
-        "workspace/slurm/gpu_job.slurm.txt"
-      ],
-      "evidence": [
-        "evidence/euler/gpu-review.md"
-      ],
-      "human_gate": true,
-      "track": "euler_gpu"
+      "activity": {
+        "action": "Correct the unsafe one-GPU Slurm fixture for the es_fuge share, choose one approved GPU model, and justify bounded CPU, memory, time, and logs. Do not submit it.",
+        "commands": [],
+        "expected_result": "The parser accepts one explicit GPU, no forced partition, and bounded companion resources; optional live smoke testing remains a separate deliberate action.",
+        "kind": "repository_task",
+        "machine": "local",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "The approved es_fuge share.",
+            "id": "gpu_account",
+            "options": [
+              {
+                "id": "correct",
+                "label": "The approved es_fuge share."
+              },
+              {
+                "id": "wrong_a",
+                "label": "The public share by default."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Any account name guessed from a GPU model."
+              }
+            ],
+            "prompt": "Which account provides the documented lab GPU access?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Request one explicit GPU and bounded CPU, memory, and time.",
+            "id": "one_gpu_scope",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Request one explicit GPU and bounded CPU, memory, and time."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Lock every CPU and all memory on the physical node."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Force an undocumented partition."
+              }
+            ],
+            "prompt": "What should a one-GPU starter request do?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "powershell",
+          "zsh",
+          "bash"
+        ]
+      },
+      "review_policy": "exception_only",
+      "submission": {
+        "artifact_paths": [
+          "workspace/slurm/gpu_job.slurm.txt"
+        ],
+        "path": "submissions/euler-gpu-review.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Review A One-GPU Euler Plan",
+      "track": "euler_gpu",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "gpu_script",
+        "pass_percent": 100,
+        "receipt_checks": [
+          "bounded_file",
+          "required_1",
+          "required_2",
+          "required_3",
+          "required_4",
+          "forbidden_1_absent"
+        ],
+        "remote_assessor": "slurm_gpu",
+        "requires_live_confirmation": false
+      }
     },
     "euler-storage-reproducibility": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/euler/storage-reproducibility.md"
-      ],
-      "human_gate": true,
-      "track": "euler_cpu"
+      "activity": {
+        "action": "Place fictional code, immutable inputs, temporary scratch, durable outputs, environment metadata, and logs in a reproducible run plan.",
+        "commands": [],
+        "expected_result": "The plan separates Git, approved Euler storage, scratch, and durable results and records enough inputs to rerun the job.",
+        "kind": "structured_plan",
+        "machine": "browser",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "Temporary high-throughput files that can be recreated.",
+            "id": "scratch_role",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Temporary high-throughput files that can be recreated."
+              },
+              {
+                "id": "wrong_a",
+                "label": "The only durable copy of a thesis dataset."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Git history."
+              }
+            ],
+            "prompt": "What is Euler scratch for?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "Code revision, environment, immutable inputs, parameters, resources, and outputs.",
+            "id": "run_record",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Code revision, environment, immutable inputs, parameters, resources, and outputs."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Only the final plot."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Only the Slurm job ID."
+              }
+            ],
+            "prompt": "What must a reproducible run identify?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "none"
+        ]
+      },
+      "review_policy": "automatic",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/euler-storage-reproducibility.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Place Euler Data And Freeze Run Inputs",
+      "track": "euler_cpu",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "euler_storage",
+        "pass_percent": 80,
+        "receipt_checks": [
+          "structured_activity"
+        ],
+        "remote_assessor": "structured_answers",
+        "requires_live_confirmation": false
+      }
     },
     "git-manual-pr": {
-      "editable_artifacts": [
-        "workspace/manual_task/project-note.md"
-      ],
-      "evidence": [
-        "evidence/git/manual-pr.md"
-      ],
-      "human_gate": true,
-      "track": "git"
+      "activity": {
+        "action": "In the separate practice repository, make the bounded note change, inspect status and both diffs, commit it, push it, and create your first draft PR manually.",
+        "commands": [
+          {
+            "command": "git status --short --branch",
+            "expected": "A named practice branch is shown; it is not main.",
+            "platform": "windows",
+            "shell": "powershell"
+          },
+          {
+            "command": "git status --short --branch",
+            "expected": "A named practice branch is shown; it is not main.",
+            "platform": "macos",
+            "shell": "zsh"
+          },
+          {
+            "command": "git status --short --branch",
+            "expected": "A named practice branch is shown; it is not main.",
+            "platform": "linux",
+            "shell": "bash"
+          },
+          {
+            "command": "git diff -- workspace/manual_task",
+            "expected": "Only the intended unstaged change is shown.",
+            "platform": "windows",
+            "shell": "powershell"
+          },
+          {
+            "command": "git diff -- workspace/manual_task",
+            "expected": "Only the intended unstaged change is shown.",
+            "platform": "macos",
+            "shell": "zsh"
+          },
+          {
+            "command": "git diff -- workspace/manual_task",
+            "expected": "Only the intended unstaged change is shown.",
+            "platform": "linux",
+            "shell": "bash"
+          },
+          {
+            "command": "git diff --cached --check",
+            "expected": "No whitespace error is reported.",
+            "platform": "windows",
+            "shell": "powershell"
+          },
+          {
+            "command": "git diff --cached --check",
+            "expected": "No whitespace error is reported.",
+            "platform": "macos",
+            "shell": "zsh"
+          },
+          {
+            "command": "git diff --cached --check",
+            "expected": "No whitespace error is reported.",
+            "platform": "linux",
+            "shell": "bash"
+          },
+          {
+            "command": "git diff --cached",
+            "expected": "The staged diff contains only the intended file.",
+            "platform": "windows",
+            "shell": "powershell"
+          },
+          {
+            "command": "git diff --cached",
+            "expected": "The staged diff contains only the intended file.",
+            "platform": "macos",
+            "shell": "zsh"
+          },
+          {
+            "command": "git diff --cached",
+            "expected": "The staged diff contains only the intended file.",
+            "platform": "linux",
+            "shell": "bash"
+          }
+        ],
+        "expected_result": "The personal practice PR contains only the intended file, a Conventional Commit, and an honest verification record.",
+        "kind": "repository_task",
+        "machine": "local",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "The personal practice PR shown by the mission.",
+            "id": "pr_roles",
+            "options": [
+              {
+                "id": "correct",
+                "label": "The personal practice PR shown by the mission."
+              },
+              {
+                "id": "wrong_a",
+                "label": "The hidden transport PR used by the passport."
+              },
+              {
+                "id": "wrong_b",
+                "label": "A PR changing the handbook main branch."
+              }
+            ],
+            "prompt": "Which PR do you create manually in this mission?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Inspect git diff --cached and confirm every staged change.",
+            "id": "staged_diff",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Inspect git diff --cached and confirm every staged change."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Force-push the branch."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Merge the PR yourself."
+              }
+            ],
+            "prompt": "What must happen immediately before committing?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "powershell",
+          "zsh",
+          "bash"
+        ]
+      },
+      "review_policy": "exception_only",
+      "submission": {
+        "artifact_paths": [
+          "workspace/manual_task/project-note.md"
+        ],
+        "path": "submissions/git-manual-pr.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Complete A Manual Pull Request Loop",
+      "track": "git",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "git_practice",
+        "pass_percent": 80,
+        "receipt_checks": [
+          "practice_branch",
+          "bounded_diff",
+          "conventional_commit",
+          "draft_pr"
+        ],
+        "remote_assessor": "git_practice",
+        "requires_live_confirmation": false
+      }
     },
     "git-tools-auth": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/git/tools-auth.md"
-      ],
-      "human_gate": false,
-      "track": "git"
+      "activity": {
+        "action": "Run the read-only tool and identity checks shown below. Fix only a missing name or email through the linked platform guide.",
+        "commands": [
+          {
+            "command": "git --version",
+            "expected": "A Git version is printed.",
+            "platform": "windows",
+            "shell": "powershell"
+          },
+          {
+            "command": "git --version",
+            "expected": "A Git version is printed.",
+            "platform": "macos",
+            "shell": "zsh"
+          },
+          {
+            "command": "git --version",
+            "expected": "A Git version is printed.",
+            "platform": "linux",
+            "shell": "bash"
+          },
+          {
+            "command": "gh auth status --hostname github.com",
+            "expected": "The intended GitHub account is named.",
+            "platform": "windows",
+            "shell": "powershell"
+          },
+          {
+            "command": "gh auth status --hostname github.com",
+            "expected": "The intended GitHub account is named.",
+            "platform": "macos",
+            "shell": "zsh"
+          },
+          {
+            "command": "gh auth status --hostname github.com",
+            "expected": "The intended GitHub account is named.",
+            "platform": "linux",
+            "shell": "bash"
+          },
+          {
+            "command": "git config --get user.name",
+            "expected": "Your chosen commit author name is printed.",
+            "platform": "windows",
+            "shell": "powershell"
+          },
+          {
+            "command": "git config --get user.name",
+            "expected": "Your chosen commit author name is printed.",
+            "platform": "macos",
+            "shell": "zsh"
+          },
+          {
+            "command": "git config --get user.name",
+            "expected": "Your chosen commit author name is printed.",
+            "platform": "linux",
+            "shell": "bash"
+          },
+          {
+            "command": "git config --get user.email",
+            "expected": "Your chosen commit author email is printed.",
+            "platform": "windows",
+            "shell": "powershell"
+          },
+          {
+            "command": "git config --get user.email",
+            "expected": "Your chosen commit author email is printed.",
+            "platform": "macos",
+            "shell": "zsh"
+          },
+          {
+            "command": "git config --get user.email",
+            "expected": "Your chosen commit author email is printed.",
+            "platform": "linux",
+            "shell": "bash"
+          },
+          {
+            "command": "git remote -v",
+            "expected": "Only expected GitHub remotes appear; no password or token is embedded in a URL.",
+            "platform": "windows",
+            "shell": "powershell"
+          },
+          {
+            "command": "git remote -v",
+            "expected": "Only expected GitHub remotes appear; no password or token is embedded in a URL.",
+            "platform": "macos",
+            "shell": "zsh"
+          },
+          {
+            "command": "git remote -v",
+            "expected": "Only expected GitHub remotes appear; no password or token is embedded in a URL.",
+            "platform": "linux",
+            "shell": "bash"
+          }
+        ],
+        "expected_result": "Git and GitHub CLI are available, GitHub CLI names the intended account, and Git identity is explicit.",
+        "kind": "guided_local",
+        "machine": "local",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "The intended GitHub account is authenticated.",
+            "id": "auth_scope",
+            "options": [
+              {
+                "id": "correct",
+                "label": "The intended GitHub account is authenticated."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Any GitHub account is sufficient."
+              },
+              {
+                "id": "wrong_b",
+                "label": "An ETH password is stored in Git."
+              }
+            ],
+            "prompt": "What must gh auth status confirm?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "Read the named check and use its bounded recovery step.",
+            "id": "safe_diagnosis",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Read the named check and use its bounded recovery step."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Delete the .git directory."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Regenerate every SSH key."
+              }
+            ],
+            "prompt": "What should you do before repairing a failed tool check?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "powershell",
+          "zsh",
+          "bash"
+        ]
+      },
+      "review_policy": "automatic",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/git-tools-auth.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Configure Git Identity And Your Editor",
+      "track": "git",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "git_environment",
+        "pass_percent": 80,
+        "receipt_checks": [
+          "git",
+          "github_auth",
+          "identity_name",
+          "identity_email",
+          "remote_credentials_absent",
+          "practice_repository",
+          "practice_branch"
+        ],
+        "remote_assessor": "structured_answers",
+        "requires_live_confirmation": false
+      }
+    },
+    "nas-access-storage": {
+      "activity": {
+        "action": "Enter the supervisor-approved NAS project root locally, let the verifier confirm the allowed boundary, then create, read, and remove one random test file inside your ETH-username folder.",
+        "commands": [],
+        "expected_result": "The bounded write/read/delete round trip succeeds only inside the approved username folder; the raw path is never submitted publicly.",
+        "kind": "guided_remote",
+        "machine": "nas",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Inside the approved supervisor project folder and your ETH-username subfolder.",
+            "id": "nas_folder",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Inside the approved supervisor project folder and your ETH-username subfolder."
+              },
+              {
+                "id": "wrong_a",
+                "label": "At the NAS root."
+              },
+              {
+                "id": "wrong_b",
+                "label": "In another student's folder."
+              }
+            ],
+            "prompt": "Where may you create project data on the NAS?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "No; keep separate clones and use GitHub for code collaboration.",
+            "id": "nas_git",
+            "options": [
+              {
+                "id": "correct",
+                "label": "No; keep separate clones and use GitHub for code collaboration."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Yes; it prevents merge conflicts."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Only if chmod 777 is used."
+              }
+            ],
+            "prompt": "Should the NAS hold one shared Git working tree?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "powershell",
+          "zsh",
+          "bash"
+        ]
+      },
+      "review_policy": "automatic",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/nas-access-storage.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "attestation"
+        ]
+      },
+      "title": "Verify Your Approved NAS Workspace",
+      "track": "nas",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "nas_access",
+        "pass_percent": 100,
+        "receipt_checks": [
+          "username_boundary",
+          "write",
+          "read",
+          "removed"
+        ],
+        "remote_assessor": "nas_receipt",
+        "requires_live_confirmation": true
+      }
     },
     "python-environment": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/python/environment.md"
-      ],
-      "human_gate": false,
-      "track": "python"
+      "activity": {
+        "action": "Create the project virtual environment with the platform-specific command, activate it, and run the interpreter check.",
+        "commands": [
+          {
+            "command": "py -3 -m venv .venv",
+            "expected": ".venv is created without overwriting another path.",
+            "platform": "windows",
+            "shell": "powershell"
+          },
+          {
+            "command": "python3 -m venv .venv",
+            "expected": ".venv is created without overwriting another path.",
+            "platform": "macos",
+            "shell": "zsh"
+          },
+          {
+            "command": "python3 -m venv .venv",
+            "expected": ".venv is created without overwriting another path.",
+            "platform": "linux",
+            "shell": "bash"
+          }
+        ],
+        "expected_result": "Python runs from the project .venv and Git reports that .venv is ignored.",
+        "kind": "guided_local",
+        "machine": "local",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "No. It is reproducible local state and must remain ignored.",
+            "id": "venv_tracking",
+            "options": [
+              {
+                "id": "correct",
+                "label": "No. It is reproducible local state and must remain ignored."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Yes, so everyone receives the same interpreter binaries."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Only on Windows."
+              }
+            ],
+            "prompt": "Should .venv be committed?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "The reported interpreter path is inside the project .venv.",
+            "id": "interpreter_check",
+            "options": [
+              {
+                "id": "correct",
+                "label": "The reported interpreter path is inside the project .venv."
+              },
+              {
+                "id": "wrong_a",
+                "label": "The terminal prompt has any parentheses."
+              },
+              {
+                "id": "wrong_b",
+                "label": "python --version prints a number."
+              }
+            ],
+            "prompt": "What proves the environment is active?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "powershell",
+          "zsh",
+          "bash"
+        ]
+      },
+      "review_policy": "automatic",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/python-environment.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Create A Reproducible Python Environment",
+      "track": "python",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "python_environment",
+        "pass_percent": 80,
+        "receipt_checks": [
+          "venv_exists",
+          "venv_ignored",
+          "venv_interpreter"
+        ],
+        "remote_assessor": "python_environment",
+        "requires_live_confirmation": false
+      }
     },
     "python-reproducible-change": {
-      "editable_artifacts": [
-        "workspace/python_project/passport_example.py",
-        "workspace/python_project/tests/test_passport_example.py"
-      ],
-      "evidence": [
-        "evidence/python/reproducible-change.md"
-      ],
-      "human_gate": true,
-      "track": "python"
+      "activity": {
+        "action": "Correct the bounded Python function, add the missing test, run the project test suite inside .venv, and review the diff.",
+        "commands": [
+          {
+            "command": ".\\\\.venv\\\\Scripts\\\\python.exe -m unittest discover -s tests -v",
+            "expected": "The visible project tests pass in the project environment.",
+            "platform": "windows",
+            "shell": "powershell"
+          },
+          {
+            "command": "./.venv/bin/python -m unittest discover -s tests -v",
+            "expected": "The visible project tests pass in the project environment.",
+            "platform": "macos",
+            "shell": "zsh"
+          },
+          {
+            "command": "./.venv/bin/python -m unittest discover -s tests -v",
+            "expected": "The visible project tests pass in the project environment.",
+            "platform": "linux",
+            "shell": "bash"
+          }
+        ],
+        "expected_result": "The hidden behavior check and the visible tests pass without committing the environment or generated files.",
+        "kind": "repository_task",
+        "machine": "local",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": false,
+            "feedback": "After you personally ran the named test command and observed success.",
+            "id": "test_claim",
+            "options": [
+              {
+                "id": "correct",
+                "label": "After you personally ran the named test command and observed success."
+              },
+              {
+                "id": "wrong_a",
+                "label": "When an agent says it ran tests."
+              },
+              {
+                "id": "wrong_b",
+                "label": "When the code looks correct."
+              }
+            ],
+            "prompt": "When may you record that tests passed?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Source, tests, and declared dependencies needed to reproduce the change.",
+            "id": "reproducible_scope",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Source, tests, and declared dependencies needed to reproduce the change."
+              },
+              {
+                "id": "wrong_a",
+                "label": "The .venv directory and caches."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Local credentials and editor state."
+              }
+            ],
+            "prompt": "What belongs in the commit?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "powershell",
+          "zsh",
+          "bash"
+        ]
+      },
+      "review_policy": "exception_only",
+      "submission": {
+        "artifact_paths": [
+          "workspace/python_project/passport_example.py",
+          "workspace/python_project/tests/test_passport_example.py"
+        ],
+        "path": "submissions/python-reproducible-change.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Make And Verify A Reproducible Python Change",
+      "track": "python",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "python_project",
+        "pass_percent": 80,
+        "receipt_checks": [
+          "visible_tests"
+        ],
+        "remote_assessor": "python_project",
+        "requires_live_confirmation": false
+      }
     },
     "supervisor-offboarding": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/supervisor/offboarding.md"
-      ],
-      "human_gate": true,
-      "track": "supervisor"
+      "activity": {
+        "action": "Build a fictional offboarding sequence covering ownership transfer, durable data, code, credentials, devices, access removal, retention, and confirmation.",
+        "commands": [],
+        "expected_result": "Operational actions have named owners and dates, and no project asset depends on the departing person's private account or storage.",
+        "kind": "structured_plan",
+        "machine": "browser",
+        "questions": [
+          {
+            "answer": [
+              "step_1",
+              "step_2",
+              "step_3",
+              "step_4"
+            ],
+            "critical": true,
+            "feedback": "Use the safe sequence shown in the mission, without skipping verification.",
+            "id": "offboarding_order",
+            "options": [
+              {
+                "id": "step_1",
+                "label": "Inventory and transfer ownership."
+              },
+              {
+                "id": "step_2",
+                "label": "Verify durable data, code, and documentation."
+              },
+              {
+                "id": "step_3",
+                "label": "Rotate shared credentials and remove access."
+              },
+              {
+                "id": "step_4",
+                "label": "Record completion and remaining retention decisions."
+              }
+            ],
+            "prompt": "Choose the safe high-level offboarding order.",
+            "type": "order"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Dependencies on the departing person's private accounts, laptop, and undocumented knowledge.",
+            "id": "personal_dependency",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Dependencies on the departing person's private accounts, laptop, and undocumented knowledge."
+              },
+              {
+                "id": "wrong_a",
+                "label": "All version history."
+              },
+              {
+                "id": "wrong_b",
+                "label": "The approved durable archive."
+              }
+            ],
+            "prompt": "What must be removed from the project?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "none"
+        ]
+      },
+      "review_policy": "operational_approval",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/supervisor-offboarding.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Plan Handover And Offboarding",
+      "track": "supervisor",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "supervisor_plan",
+        "pass_percent": 100,
+        "receipt_checks": [
+          "structured_activity"
+        ],
+        "remote_assessor": "structured_answers",
+        "requires_live_confirmation": false
+      }
     },
     "supervisor-onboarding": {
-      "editable_artifacts": [],
-      "evidence": [
-        "evidence/supervisor/onboarding-packet.md"
-      ],
-      "human_gate": false,
-      "track": "supervisor"
+      "activity": {
+        "action": "Build a fictional least-privilege onboarding packet that names responsibilities, systems, owners, data locations, review dates, and the separate operational approvals required.",
+        "commands": [],
+        "expected_result": "The plan grants no access by implication and clearly separates training completion from authorization.",
+        "kind": "structured_plan",
+        "machine": "browser",
+        "questions": [
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "No. Access requires a separate owner-approved operational decision.",
+            "id": "training_access",
+            "options": [
+              {
+                "id": "correct",
+                "label": "No. Access requires a separate owner-approved operational decision."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Yes, automatically for every listed system."
+              },
+              {
+                "id": "wrong_b",
+                "label": "Only for GPU resources."
+              }
+            ],
+            "prompt": "Does passing the passport authorize system access?",
+            "type": "single"
+          },
+          {
+            "answer": [
+              "correct"
+            ],
+            "critical": true,
+            "feedback": "Only what the person needs, with an owner and review or end date.",
+            "id": "least_privilege",
+            "options": [
+              {
+                "id": "correct",
+                "label": "Only what the person needs, with an owner and review or end date."
+              },
+              {
+                "id": "wrong_a",
+                "label": "Every lab system to avoid later work."
+              },
+              {
+                "id": "wrong_b",
+                "label": "A colleague's credentials."
+              }
+            ],
+            "prompt": "What access should be requested?",
+            "type": "single"
+          }
+        ],
+        "shells": [
+          "none"
+        ]
+      },
+      "review_policy": "operational_approval",
+      "submission": {
+        "artifact_paths": [],
+        "path": "submissions/supervisor-onboarding.json",
+        "public_fields": [
+          "answers",
+          "receipts",
+          "artifacts",
+          "attestation"
+        ]
+      },
+      "title": "Assign A Researcher Route And Safe Project Environment",
+      "track": "supervisor",
+      "verification": {
+        "critical_must_pass": true,
+        "local_verifier": "supervisor_plan",
+        "pass_percent": 100,
+        "receipt_checks": [
+          "structured_activity"
+        ],
+        "remote_assessor": "structured_answers",
+        "requires_live_confirmation": false
+      }
     }
   },
   "platforms": [
@@ -231,6 +2605,12 @@
         "git"
       ]
     },
+    "nas": {
+      "title": "Use the IDEAL Lab NAS for project data",
+      "tracks": [
+        "nas"
+      ]
+    },
     "python": {
       "title": "Develop or run Python projects",
       "tracks": [
@@ -244,7 +2624,7 @@
       ]
     }
   },
-  "schema_version": 1,
+  "schema_version": 2,
   "source_repository": "soheylm-passport-sandbox/passport-exercises",
   "track_dependencies": {
     "ai_agents": [
@@ -252,12 +2632,15 @@
     ],
     "blade": [],
     "core": [],
-    "data_steward": [],
+    "data_steward": [
+      "git"
+    ],
     "euler_cpu": [],
     "euler_gpu": [
       "euler_cpu"
     ],
     "git": [],
+    "nas": [],
     "python": [
       "git"
     ],
@@ -315,6 +2698,13 @@
         "euler-gpu-review"
       ],
       "title": "Euler GPU"
+    },
+    {
+      "id": "nas",
+      "missions": [
+        "nas-access-storage"
+      ],
+      "title": "IDEAL Lab NAS"
     },
     {
       "id": "data_steward",

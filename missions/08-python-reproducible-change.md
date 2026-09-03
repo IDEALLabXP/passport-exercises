@@ -5,51 +5,72 @@
 You can connect a small behavior change to a regression test, run the declared
 checks, inspect the diff, and explain how another contributor reproduces it.
 
-## Why This Matters
+## Concept
 
 “It works on my machine” is not research evidence. Code, dependencies, inputs,
 configuration, tests, and relevant versions must be identifiable.
 
-## Before You Start
+## Worked Example
 
-Activate `ideal-passport` and confirm the training fixture passes its baseline
-checks before editing.
+The hidden behavior check and the visible tests pass without committing the environment or generated files.
 
-## Machine And Shell
+A correct example uses these decisions:
 
-**Your computer - PowerShell, zsh, or bash in `workspace/python_project`.**
+- **When may you record that tests passed?** After you personally ran the named test command and observed success.
+- **What belongs in the commit?** Source, tests, and declared dependencies needed to reproduce the change.
 
-## Steps
+## Common Trap
 
-1. Read the fixture README and source before editing.
-2. Add the requested regression test.
-3. Make the smallest source change that satisfies the behavior.
-4. Run the project test command.
-5. Inspect `git diff --check` and the source/test diff.
-6. Update the evidence with actual commands and observed results.
-7. Commit with a subject matching the behavior, not the tool used.
+Accepting a passing command from an agent without personally running it in the intended environment.
 
-## Expected Result
+## Your Action
 
-The baseline and new regression tests pass, no unrelated file changes appear,
-and a clean contributor can identify the environment and test command.
+Correct the bounded Python function, add the missing test, run the project test suite inside .venv, and review the diff.
 
-## Independent Verification
+**windows / powershell**
 
-Temporarily review the change as if it came from someone else: read only the
-diff and project declaration, then determine what behavior changed and how it
-was tested. If that is unclear, improve the test, naming, or explanation.
+```powershell
+.\\.venv\\Scripts\\python.exe -m unittest discover -s tests -v
+```
 
-## Evidence To Submit
+Expected: The visible project tests pass in the project environment.
 
-Complete `evidence/python/reproducible-change.md`. Include concise command names
-and results, not complete environment dumps or local caches.
+**macos / zsh**
+
+```zsh
+./.venv/bin/python -m unittest discover -s tests -v
+```
+
+Expected: The visible project tests pass in the project environment.
+
+**linux / bash**
+
+```bash
+./.venv/bin/python -m unittest discover -s tests -v
+```
+
+Expected: The visible project tests pass in the project environment.
+
+The passport presents the structured questions and required confirmation in the
+browser. Do not create or edit a submission JSON file by hand.
+
+## Check Your Work
+
+Use **Check my work** before submitting. The local verifier checks only the
+bounded activity named above. A score of 80% is required, and every
+safety-critical question must be correct. Failed attempts provide targeted
+feedback and can be retried without penalty.
 
 ## If Blocked
 
 Return to the last passing baseline, inspect the first failing assertion, and
 reduce the problem. Do not delete tests, broaden tolerances, or install random
 packages merely to make the check green.
+
+Useful references:
+
+- [Reproducible Python](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/labs/reproducible-python.md)
+- [Code Contributor](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/tracks/code-contributor.md)
 
 ## Understand Before Accepting AI Output
 
@@ -59,7 +80,6 @@ was not personally run.
 
 ## Finish And Continue
 
-Commit and push the requested evidence. The controller queues review of the
-behavior, evidence, and reproducibility statement automatically. Return later
-for the result; no appointment is required. The next AI track, when assigned,
-uses a comparable but different task.
+When **Check my work** passes, use **Submit mission** once. The launcher
+publishes only this mission's generated, sanitized submission. Continue when the
+dashboard shows the trusted result; a local check alone is not a pass.

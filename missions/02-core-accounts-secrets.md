@@ -5,60 +5,50 @@
 You can protect GitHub and ETH access, distinguish public from private SSH-key
 material, and respond safely if a credential is exposed.
 
-## Why This Matters
+## Concept
 
 Commands run under your identity. A leaked token or private key may provide
 access to private repositories, research data, or shared compute even when no
 password was disclosed.
 
-## Before You Start
+## Worked Example
 
-Read [Accounts and security](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/core/accounts-and-security.md). Keep
-all passwords, recovery codes, tokens, private keys, and unpublished material
-out of the evidence and this conversation.
+Every credential-critical answer is correct before the mission can pass.
 
-## Machine And Shell
+A correct example uses these decisions:
 
-**Your computer - web browser.** Account settings are changed only on the
-official service page reached through your own bookmark or typed address.
+- **A token may have been exposed. What comes first?** Revoke or rotate it, then report through the private incident path.
+- **Which SSH file may be shared with a service?** Only the public key ending in .pub.
+- **How should you verify GitHub MFA without exposing a secret?** Check the authentication status in your own GitHub security settings; never submit a recovery code.
 
-## Steps
+## Common Trap
 
-1. Confirm that multi-factor authentication is enabled for GitHub.
-2. Store recovery codes in an approved private password manager or other
-   supervisor-approved secure location.
-3. Confirm that you use your own account rather than a shared login.
-4. Learn the SSH boundary: a file ending in `.pub` is intended to be copied;
-   the matching file without `.pub` is private and must never be shared.
-5. Work through this fictional scenario: a token appears in a Git commit.
-   Decide how to revoke it, report it, preserve useful evidence, and replace it.
+Pasting a real token, private key, recovery code, or screenshot to prove that it exists.
 
-Deleting the visible line or rewriting Git history does not revoke a secret.
-Containment starts by disabling the credential at its issuing service.
+## Your Action
 
-## Expected Result
+Classify the account and secret scenarios, then choose the safe response for each one.
 
-Your account uses MFA, recovery material is stored privately, and your scenario
-response starts with revocation and reporting rather than concealment or broad
-destructive cleanup.
+The passport presents the structured questions and required confirmation in the
+browser. Do not create or edit a submission JSON file by hand.
 
-## Independent Verification
+## Check Your Work
 
-Without revealing any value, identify where GitHub reports MFA status. Point to
-a fictitious pair of filenames and correctly identify which SSH-key file may be
-copied.
-
-## Evidence To Submit
-
-Complete `evidence/core/accounts-secrets.md`. State safeguards and reasoning
-only. Never paste a token, private key, recovery code, ETH password, or account
-settings screenshot.
+Use **Check my work** before submitting. The local verifier checks only the
+bounded activity named above. A score of 100% is required, and every
+safety-critical question must be correct. Failed attempts provide targeted
+feedback and can be retried without penalty.
 
 ## If Blocked
 
 If you suspect a real exposure, stop the exercise and follow
 [Incidents and getting help](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/core/incidents-and-help.md). Do not
 post the secret in a GitHub issue or ask an AI tool to inspect it.
+
+Useful references:
+
+- [Accounts And Security](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/core/accounts-and-security.md)
+- [Incidents And Help](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/core/incidents-and-help.md)
 
 ## Understand Before Accepting AI Output
 
@@ -67,5 +57,6 @@ credential. Verify the issuing service, scope, and incident path yourself.
 
 ## Finish And Continue
 
-Commit the sanitized scenario response. It accumulates for the final universal
-core review, so you can continue without waiting after every reflective step.
+When **Check my work** passes, use **Submit mission** once. The launcher
+publishes only this mission's generated, sanitized submission. Continue when the
+dashboard shows the trusted result; a local check alone is not a pass.

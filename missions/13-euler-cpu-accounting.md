@@ -6,64 +6,50 @@ You can interpret `sacct` and `seff`, calculate requested resources, distinguish
 successful from efficient, and adjust only the next request using representative
 evidence.
 
-## Why This Matters
+## Concept
 
 Large “just in case” requests reduce availability and may wait longer without
 improving a serial or I/O-bound program. A completed state alone does not prove
 appropriate resource use.
 
-## Before You Start
+## Worked Example
 
-Have sanitized output from the tiny CPU job. Do not submit the intentionally
-oversized scenario below.
+The proposed request follows measured utilization and does not enlarge resources merely to hide an error.
 
-## Machine And Shell
+A correct example uses these decisions:
 
-**Your computer or Euler login node - text review only.** Commands that inspect
-your completed tiny job may run on Euler; scenario calculations run locally.
+- **Which value helps estimate memory actually used?** MaxRSS, interpreted with the job steps and units.
+- **A job exits immediately with a Python import error. What should you optimize first?** Fix and test the software environment before changing resources.
+- **A representative serial job requested 4 CPUs, 16 GiB per CPU, and 2 hours. It completed in 20 minutes with 22% CPU efficiency and 9 GiB MaxRSS. Which next test is justified?** Test 1 CPU, 16 GiB total memory, and 45 minutes on a representative input.
 
-## Steps
+## Common Trap
 
-Interpret this fictional serial job:
+Treating requested memory as measured memory, or increasing every resource after a software failure.
 
-```text
-Requested: 16 CPUs, 4 GiB per CPU, 4 hours
-State: COMPLETED
-Elapsed: 00:11:42
-MaxRSS: 3.8 GiB
-CPU efficiency: 6.4%
+## Your Action
+
+Inspect the recorded tiny-job sacct and seff output, then choose a justified next CPU, memory, and time request.
+
+**euler / bash**
+
+```bash
+read -r -p 'Job ID from the previous mission: ' job_id
+sacct -X -j "$job_id" --format=JobID,State,ExitCode,Elapsed,AllocCPUS,ReqMem,MaxRSS
+seff "$job_id"
 ```
 
-1. Calculate total requested memory.
-2. Explain why low CPU efficiency matters.
-3. Propose a smaller next experiment with justified headroom.
-4. State what measurement would justify more CPUs.
-5. Explain why one sample may not represent every input.
+Expected: the same completed job appears in `sacct`, followed by its
+requested-versus-used efficiency summary.
 
-Then inspect your real tiny job with `sacct` and `seff`. The purpose is to read
-the fields, not to optimize the toy calculation as a production workload.
+The passport presents the structured questions and required confirmation in the
+browser. Do not create or edit a submission JSON file by hand.
 
-Finally explain this queued-job boundary: Slurm captures the submitted batch
-script, but external code, configuration, and input files can change while a
-job is pending. Production runs need a clean reviewed source revision and
-immutable run-specific configuration/input snapshot.
+## Check Your Work
 
-## Expected Result
-
-The proposal reduces unsupported resources, retains reasonable headroom, and
-does not infer parallel scaling from available CPUs. The input explanation
-distinguishes captured script text from external mutable files.
-
-## Independent Verification
-
-Check memory arithmetic yourself and identify whether reported memory is per
-CPU or per node. When `MaxRSS` is blank for the top-level job, inspect the
-`.batch` step.
-
-## Evidence To Submit
-
-Complete `evidence/euler/accounting.md` with the fictional calculation and your
-sanitized tiny-job interpretation. Do not include broad job history.
+Use **Check my work** before submitting. The local verifier checks only the
+bounded activity named above. A score of 80% is required, and every
+safety-critical question must be correct. Failed attempts provide targeted
+feedback and can be retried without penalty.
 
 ## If Blocked
 
@@ -72,6 +58,11 @@ Do not increase resources when fields are unclear. Use
 and ask for help for MPI/multiprocess workloads, highly variable inputs, or
 disagreeing metrics.
 
+Useful references:
+
+- [Euler Resource Optimization](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/labs/euler-resource-optimization.md)
+- [Slurm](https://github.com/IDEALLab/onboarding-IT/blob/docs/llm-agent-overhaul/docs/reference/euler/slurm.md)
+
 ## Understand Before Accepting AI Output
 
 Verify arithmetic, per-CPU versus total memory, representativeness, and the
@@ -79,5 +70,6 @@ parallelism claim. An agent cannot infer scaling merely from CPU availability.
 
 ## Finish And Continue
 
-Submit the measured interpretation and next-request reasoning. The next mission
-applies aggregate-resource reasoning to arrays without submitting a large one.
+When **Check my work** passes, use **Submit mission** once. The launcher
+publishes only this mission's generated, sanitized submission. Continue when the
+dashboard shows the trusted result; a local check alone is not a pass.
